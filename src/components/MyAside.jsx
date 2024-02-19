@@ -7,7 +7,7 @@ const MyAside = () => {
   return (
     <Container>
       <Row>
-        <Col xs={5} md={4} lg={5}>
+        <Col className="d-none d-md-flex" md={4} lg={5}>
           <Card>
             <Card.Title className="p-3 fs-6">
               Persone che potresti conoscere
@@ -27,23 +27,30 @@ const MyAside = () => {
                     ></img>
                   </div>
 
-                  <div className="ms-3">
-                    <h6>Alessia</h6>
-                    <p>Contatrice di arachidi</p>
+                  <div className=" ms-3 ">
+                    <h6 className="mb-0 lh-sm">Alessia</h6>
+                    <p className="mb-0 fs-6 lh-sm">Contatrice di arachidi</p>
                     <Button
                       variant="outline-secondary"
-                      className="collegati-button"
+                      className="rounded-pill mt-3"
                       size="sm"
                     >
-                      <i className="bi bi-person-plus"></i>
+                      <i className="bi bi-person-fill-add me-2"></i>
                       Collegati
                     </Button>
                   </div>
                 </ListGroup.Item>
               </ListGroup>
             </CardBody>
-
-            <Button variant="light">Mostra tutto</Button>
+            <div className="px-3">
+              <hr />
+            </div>
+            <Button
+              variant="light"
+              className="text text-secondary font-weight-700"
+            >
+              Mostra tutto
+            </Button>
           </Card>
         </Col>
       </Row>
