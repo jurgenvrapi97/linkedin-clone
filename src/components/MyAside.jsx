@@ -5,7 +5,7 @@ import { CardBody, ListGroup } from "react-bootstrap";
 const MyAside = () => {
   return (
     <Card className="d-none d-md-flex" md={12} lg={12}>
-      <Card.Title className="p-3 fs-6">
+      <Card.Title className="p-3 fs-6 text-primary">
         Persone che potresti conoscere
       </Card.Title>
       <Card.Subtitle className="p-3 fs-6">

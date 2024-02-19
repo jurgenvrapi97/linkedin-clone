@@ -1,0 +1,21 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+$new-theme-colors: (
+  "primary": rgb(117, 80, 254),
+  "bt-main-color": rgb(26, 203, 152),
+  "back-orange": rgba(240, 156, 0, 0.082),
+  "orange": rgb(202, 118, 7),
+);
+
+$theme-colors: map-merge($theme-colors, $new-theme-colors);
+
+$new-position: (
+  5: 5%,
+  10: 10%,
+  20: 20%,
+  80: 80%,
+  "vai-sotto": -20%,
+);
+$position-values: map-merge($position-values, $new-position);
+@import "~bootstrap/scss/bootstrap";

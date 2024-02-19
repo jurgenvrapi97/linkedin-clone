@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 const Mainprofile = () => {
   return (
@@ -11,7 +11,7 @@ const Mainprofile = () => {
 
           <img
             src="https://placekitten.com/200"
-            className="rounded-circle position-absolute bottom-0 start-0 img-fluid mw-100"
+            className="rounded-circle position-absolute bottom-vai-sotto start-5 img-fluid mw-100"
           />
         </div>
 
@@ -52,15 +52,15 @@ const Mainprofile = () => {
       </Card>
 
       {/* <Container fluid className="pt-3"> */}
-        {/* <Row>
+      {/* <Row>
           <Col xs={12} md={9}> */}
-            <Card className="my-3">
-              <Card.Body>
-                <Card.Title>Informazioni</Card.Title>
-                <Card.Text>-inserisci le info-</Card.Text>
-              </Card.Body>
-            </Card>
-          {/* </Col>
+      <Card className="my-3">
+        <Card.Body>
+          <Card.Title>Informazioni</Card.Title>
+          <Card.Text>-inserisci le info-</Card.Text>
+        </Card.Body>
+      </Card>
+      {/* </Col>
         </Row> */}
       {/* </Container> */}
     </>
