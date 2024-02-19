@@ -5,45 +5,27 @@ import { Container, Row, Col } from "react-bootstrap";
 const Mainprofile = () => {
   return (
     <>
-      <Container fluid className="mt-0 position-relative">
+      <Container fluid className="mt-0">
         <Row>
           <Col xs={12} md={9}>
             <Card>
-              <Card.Img variant="top" src="https://placebear.com/900/400" />
-              <Card.Body className="pt-5">
-                {/* <Container className="position-relative"> */}
-                {/* <Row>
-                  <Col> */}
-                <div
-                  className="w-100 position-absolute"
-                  style={{
-                    //   position: "absolute",
-                    top: "20%",
-                    left: "1%",
-                    width: "100%",
-                  }}
-                >
-                  <img
-                    src="https://placekitten.com/200"
-                    className="rounded-circle  "
-                    // style={{
-                    //   //   position: "absolute",
-                    //   top: "20%",
-                    //   left: "1%",
-                    //   maxWidth: "100%",
-                    // }}
-                  />
-                </div>
-                {/* </Col>
-                </Row> */}
-                {/* </Container> */}
+              <div className=" position-relative container-fluid">
+                <Card.Img variant="top" src="https://placebear.com/900/400" />
+
+                <img
+                  src="https://placekitten.com/200"
+                  className="rounded-circle position-absolute bottom-0 start-0 img-fluid mw-100"
+                />
+              </div>
+
+              <Card.Body className="pt-5 ">
                 <Row>
                   <Col xs={6}>
                     <Card.Title>-Inserire nome profilo-</Card.Title>
                     <Card.Text className="pt-0">-inserisci lavoro-</Card.Text>
                     <p>
                       inserisci info di contatto -
-                      <a src="#">Informazioni di contatto</a>{" "}
+                      <a src="#">Informazioni di contatto</a>
                     </p>
                     <p className="text-secondary">
                       {" "}
