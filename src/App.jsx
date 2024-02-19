@@ -8,8 +8,8 @@ import { Col, Container, Row } from "react-bootstrap";
 
 function App() {
   return (
-    <>
-      <Container>
+    <div className="bg-background">
+      <Container >
         <Row>
           <Col md={8} lg={8}>
             <Mainprofile />
@@ -19,7 +19,7 @@ function App() {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 }
 

@@ -6,12 +6,13 @@ const Mainprofile = () => {
   return (
     <>
       <Card>
-        <div className=" position-relative container-fluid">
-          <Card.Img variant="top" src="https://placebear.com/900/400" />
+        <div className=" position-relative container-fluid p-0">
+          <Card.Img variant="top" className="img-fluid" src="https://placebear.com/900/400" />
 
           <img
             src="https://placekitten.com/200"
-            className="rounded-circle position-absolute bottom-vai-sotto start-5 img-fluid mw-100"
+            className="rounded-circle position-absolute bottom-vai-sotto start-5 img-fluid mw-100 border border-light border-5"
+            width={'150px'} height={'150px'}
           />
         </div>
 
