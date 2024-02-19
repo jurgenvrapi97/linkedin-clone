@@ -51,18 +51,18 @@ const Mainprofile = () => {
         </Card.Body>
       </Card>
 
-      <Container fluid className="pt-3">
-        <Row>
-          <Col xs={12} md={9}>
-            <Card>
+      {/* <Container fluid className="pt-3"> */}
+        {/* <Row>
+          <Col xs={12} md={9}> */}
+            <Card className="my-3">
               <Card.Body>
                 <Card.Title>Informazioni</Card.Title>
                 <Card.Text>-inserisci le info-</Card.Text>
               </Card.Body>
             </Card>
-          </Col>
-        </Row>
-      </Container>
+          {/* </Col>
+        </Row> */}
+      {/* </Container> */}
     </>
   );
 };
