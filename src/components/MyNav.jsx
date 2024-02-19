@@ -53,7 +53,6 @@ const MyNav = () => {
                         <Button type='submit'>LOG</Button>
                     </InputGroup>
             </Form>) : (
-
             <NavDropdown title="Tu" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
