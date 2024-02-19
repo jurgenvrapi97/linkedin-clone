@@ -1,33 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import fetchProfile from './redux/action'
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const dispatch = useDispatch()
+  const profile = useSelector((state) => state.user)
+  const tokens = useSelector((state) => state.tokens)
+  const [username, setUsername] = useState('')
 
+  useEffect(() => {
+    const token = tokens[username]
+    if (token) {
+      dispatch(fetchProfile(token))
+    }
+  }, [dispatch, tokens, username])
+
+  const handleInputChange = (event) => {
+    setUsername(event.target.value.toLowerCase())
+  }
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Profilo utente</h1>
+        <input
+          type="text"
+          onChange={handleInputChange}
+          placeholder="Inserisci il nome utente"
+        />
+        {tokens[username] && profile && (
+          <div>
+            <p>Nome: {profile.name}</p>
+            <p>Cognome: {profile.surname}</p>
+            <p>Email: {profile.email}</p>
+            <img src={profile.image} alt="" />
+          </div>
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
