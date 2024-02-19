@@ -12,6 +12,7 @@ function App() {
 
   return (
     <div className="bg-background">
+      <MyNav />
       <Container>
         <Row>
           <Col md={8} lg={8}>
@@ -24,8 +25,6 @@ function App() {
       </Container>
     </div>
   );
-    <MyNav />
-  )
 }
 
 export default App;

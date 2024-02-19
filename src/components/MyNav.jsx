@@ -35,19 +35,19 @@ const MyNav = () => {
             </InputGroup>
           </Nav>
           <Nav>
-          <Nav.Link className='d-flex flex-column align-items-center me-4'><div><i className="bi bi-house-door-fill" style={{fontSize: '1.3em'}}></i></div>
+          <Nav.Link className='d-flex flex-column align-items-center me-0 me-lg-4'><div><i className="bi bi-house-door-fill" style={{fontSize: '1.3em'}}></i></div>
           <div className='fw-light' style={{fontSize: '0.8em'}}>Home</div></Nav.Link>
 
-          <Nav.Link className='d-flex flex-column align-items-center me-4'><div><i className="bi bi-people-fill" style={{fontSize: '1.3em'}}></i></div>
+          <Nav.Link className='d-flex flex-column align-items-center me-0 me-lg-4'><div><i className="bi bi-people-fill" style={{fontSize: '1.3em'}}></i></div>
           <div className='fw-light' style={{fontSize: '0.8em'}}>Rete</div></Nav.Link>
 
-          <Nav.Link className='d-flex flex-column align-items-center me-4'><div><i className="bi bi-briefcase-fill" style={{fontSize: '1.3em'}}></i></div>
+          <Nav.Link className='d-flex flex-column align-items-center me-0 me-lg-4'><div><i className="bi bi-briefcase-fill" style={{fontSize: '1.3em'}}></i></div>
           <div className='fw-light' style={{fontSize: '0.8em'}}>Lavoro</div></Nav.Link>
 
-          <Nav.Link className='d-flex flex-column align-items-center me-4'><div><i className="bi bi-chat-right-dots-fill" style={{fontSize: '1.3em'}}></i></div>
+          <Nav.Link className='d-flex flex-column align-items-center me-0 me-lg-4'><div><i className="bi bi-chat-right-dots-fill" style={{fontSize: '1.3em'}}></i></div>
           <div className='fw-light' style={{fontSize: '0.8em'}}>Messagistica</div></Nav.Link>
 
-          <Nav.Link className='d-flex flex-column align-items-center me-4'><div><i className="bi bi-bell-fill" style={{fontSize: '1.3em'}}></i></div>
+          <Nav.Link className='d-flex flex-column align-items-center me-0 me-lg-4'><div><i className="bi bi-bell-fill" style={{fontSize: '1.3em'}}></i></div>
           <div className='fw-light' style={{fontSize: '0.8em'}}>Notifiche</div></Nav.Link>
 
             { username === '' ?(<Form onSubmit={handleSubmit} className='nav-link'>
