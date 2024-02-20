@@ -18,8 +18,7 @@ const Experiences = () => {
             </div>
 
             <div className=" ms-3 ">
-              <h6 className="mb-0 lh-sm">-inserisci nome-</h6>
-              <p className="mb-0 fs-6 lh-sm">inserisci lavoro</p>
+              <h6 className="mb-0 lh-sm">-inserisci lavoro-</h6>
               <p className="mb-0 fs-6 lh-sm text-secondary">
                 inserisci data · inizio lavoro da
               </p>
