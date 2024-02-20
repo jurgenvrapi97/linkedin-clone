@@ -97,8 +97,9 @@ export const fetchExperiences = (token, id) => {
     }
 
     const data = await response.json()
+    console.log(data)
 
-    dispatch({ type: FETCH_USER_ID, payload: data })
+    dispatch({ type: FETCH_EXPERIENCES, payload: data })
   }
 }
 
@@ -129,20 +130,32 @@ export const fetchExperiencesCreate = (token, id, exp) => {
   }
 }
 
-export const fetchExperiencesAction = (token, id, expId, method) => {
+export const fetchExperiencesAction = (
+  token,
+  id,
+  expId,
+  method,
+  exp = null
+) => {
   return async (dispatch) => {
+    const options = {
+      method,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    }
+
+    if (method !== 'GET' && exp) {
+      options.body = JSON.stringify(exp)
+    }
+
     const response = await fetch(
       'https://striveschool-api.herokuapp.com/api/profile/' +
         id +
-        '/experiences' +
+        '/experiences/' +
         expId,
-      {
-        method,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      }
+      options
     )
 
     if (!response.ok) {
