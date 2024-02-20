@@ -3,8 +3,9 @@ import Button from "react-bootstrap/Button";
 import { CardBody, ListGroup } from "react-bootstrap";
 import { fetchGeneric } from "../redux/action";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SingleAsideComponent from "./SingleAsideComponent";
+import MyAsideModale from "./MyAsideModale";
 
 const MyAside = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,12 @@ const MyAside = () => {
   }, [dispatch]);
 
   const allProfiles = useSelector((state) => state.genericUser.user);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => setShowModal(true);
+
+  const handleCloseModal = () => setShowModal(false);
 
   return (
     <Card className="d-none d-md-flex" md={12} lg={12}>
@@ -35,9 +42,10 @@ const MyAside = () => {
         </ListGroup>
       </CardBody>
 
-      <Button variant="light" className="text text-secondary font-weight-700">
+      <Button variant="light" onClick={handleShowModal}>
         Mostra tutto
       </Button>
+      <MyAsideModale show={showModal} handleClose={handleCloseModal} />
     </Card>
   );
 };
