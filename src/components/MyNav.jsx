@@ -6,18 +6,38 @@ import Form from 'react-bootstrap/Form';
 import  Button  from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchProfile } from '../redux/action'
 
 
 const MyNav = () => {
 
     const [ inputValue, setInputValue ] = useState('')
-    const [ username, setUsername ] = useState('') 
+    const tokens = useSelector((state) => {
+      return state.user.tokens
+    })
+    const username = useSelector((state) => {
+      return state.user.user
+    })
+    const dispatch = useDispatch()
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setUsername(inputValue)
+
+        const tokenKey = Object.keys(tokens).find(key => key === inputValue)
+
+        if(tokenKey) {
+          const token = tokens[tokenKey]
+          dispatch(fetchProfile(token))
+
+        } else {
+          alert('username errato!')
+          console.log('token non valido')
+        }
         setInputValue('')
     }
+
+    console.log(username)
     return (
         <Navbar bg="light" data-bs-theme="light" className='p-0'>
         <Container className='justify-content-around'>
@@ -50,7 +70,7 @@ const MyNav = () => {
           <Nav.Link className='d-flex flex-column align-items-center me-0 me-lg-4'><div><i className="bi bi-bell-fill" style={{fontSize: '1.3em'}}></i></div>
           <div className='fw-light' style={{fontSize: '0.8em'}}>Notifiche</div></Nav.Link>
 
-            { username === '' ?(<Form onSubmit={handleSubmit} className='nav-link'>
+            { username ===  '' ? (<Form onSubmit={handleSubmit} className='nav-link'>
                     <InputGroup>
                         <Form.Control
                         placeholder="Inserisci username"

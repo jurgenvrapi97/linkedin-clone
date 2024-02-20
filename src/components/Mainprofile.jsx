@@ -1,18 +1,17 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Row, Col } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { fetchProfile } from "../redux/action";
+import { useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { fetchProfile } from "../redux/action";
 
 const Mainprofile = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch()
   const profile = useSelector((state) => state.user.user);
-  useEffect(() => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWQzMTUwMzI0ZjYwNTAwMTkzN2Q0NjkiLCJpYXQiOjE3MDgzMzIyOTEsImV4cCI6MTcwOTU0MTg5MX0.Dvp9xjhvg1QFWbOGGaWpXWP1M-7JHhQLM0zCwLO1doM";
-    dispatch(fetchProfile(token));
-  }, [dispatch]);
+  // useEffect(() =>{
+  //   const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWQzMTUwMzI0ZjYwNTAwMTkzN2Q0NjkiLCJpYXQiOjE3MDgzMzIyOTEsImV4cCI6MTcwOTU0MTg5MX0.Dvp9xjhvg1QFWbOGGaWpXWP1M-7JHhQLM0zCwLO1doM"
+  //   dispatch(fetchProfile(token))
+  // },[dispatch])
   return (
     <>
       <Card>
