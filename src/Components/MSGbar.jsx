@@ -21,7 +21,7 @@ const MSGbar = () => {
   return (
     <>
       <div
-        className={`d-flex flex-column border mn border-1 rounded-top border-secondary bg-white ${
+        className={`d-none d-md-flex  flex-column border mn border-1 rounded-top border-secondary bg-white ${
           isExpanded ? "s" : "ns"
         }`}
       >
