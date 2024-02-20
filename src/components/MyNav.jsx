@@ -7,8 +7,9 @@ import  Button  from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchProfile, fetchGeneric } from '../redux/action'
+import { fetchProfile, fetchGeneric, fetchId } from '../redux/action'
 import ListGroup from 'react-bootstrap/ListGroup';
+import { Link } from 'react-router-dom';
 
 
 const MyNav = () => {
@@ -49,15 +50,21 @@ const MyNav = () => {
       dispatch(fetchGeneric(token))
       setShowDropdown(value.trim().length > 0); 
       console.log(token)
-  }
-    console.log(username)
+     }
+
+    const handleResultClick = (userId) => {
+      const tokenKey = Object.keys(tokens).find(key => key === inputValue);
+      const token = tokens[tokenKey]
+      dispatch(fetchId(token, userId))
+    }
+
 
     useEffect(() => {
       // Nascondi il menu a tendina se entrambi l'input di ricerca e l'array dei risultati di ricerca sono vuoti
       if (inputSearch.trim().length === 0 && search.length === 0) {
           setShowDropdown(false);
       }
-  }, [inputSearch, search]);
+    }, [inputSearch, search]);
 
     return (
         <Navbar bg="light" data-bs-theme="light" className='p-0'>
@@ -80,13 +87,13 @@ const MyNav = () => {
             <ListGroup className='position-absolute top-100 ms-5 z-3 w-25 '>
              {/* Mostra il menu a tendina solo se ci sono risultati di ricerca */}
              {showDropdown && (search.filter((result) => result.name.toLowerCase().includes(inputSearch.toLowerCase()) || result.surname.toLowerCase().includes(inputSearch.toLowerCase())).map((result) => (
-                <ListGroup.Item key={result._id} className='d-flex align-items-center '>
+                <Link to={'/profile/' + result._id} key={result._id} className='list-group-item d-flex align-items-center' onClick={() => handleResultClick(result._id)}>
                   <div className='d-flex flex-grow-1'>
                     <h6 className='m-0 me-2'> {result.name} {result.surname} </h6>
                     <p className='m-0 me-2 fw-lighter '>{result.title}</p>
                   </div>
                   <img src={result.image} alt='userlogo' className='rounded-circle' height={'40px'} width={'40px'}/>               
-                </ListGroup.Item>
+                </Link>
             )))}
             </ListGroup>
 
@@ -94,10 +101,10 @@ const MyNav = () => {
 
 
           <Nav className='d-flex align-items-center '>
-          <Nav.Link className='d-flex flex-column align-items-center me-0 me-lg-4'><div><i className="bi bi-house-door-fill" style={{fontSize: '1.3em'}}></i></div>
-          <div className='fw-light d-none d-lg-flex' style={{fontSize: '0.8em'}}>Home</div></Nav.Link>
+          <Link to='/' className='nav-link d-flex flex-column align-items-center me-0 me-lg-4'><div><i className="bi bi-house-door-fill" style={{fontSize: '1.3em'}}></i></div>
+          <div className='fw-light d-none d-lg-flex' style={{fontSize: '0.8em'}}>Home</div></Link>
 
-          <Nav.Link className='d-flex flex-column align-items-center me-0 me-lg-4'><div><i className="bi bi-people-fill" style={{fontSize: '1.3em'}}></i></div>
+         <Nav.Link className='d-flex flex-column align-items-center me-0 me-lg-4'><div><i className="bi bi-people-fill" style={{fontSize: '1.3em'}}></i></div>
           <div className='fw-light d-none d-lg-flex' style={{fontSize: '0.8em'}}>Rete</div></Nav.Link>
 
           <Nav.Link className='d-flex flex-column align-items-center me-0 me-lg-4'><div><i className="bi bi-briefcase-fill" style={{fontSize: '1.3em'}}></i></div>
@@ -123,7 +130,7 @@ const MyNav = () => {
             </Form>) : (
             <div className='d-flex flex-column justify-content-center align-items-center nav-link nav-item dropdown'>
               <NavDropdown  style={{fontSize: '0.8em'}} title={<img src={username.image} alt='username logo' height={'25px'} className='rounded-circle'/>} id="basic-nav-dropdown" >
-                <NavDropdown.Item href="#action/3.1">
+                <Link className='dropdown-item' to='/profile'>
                   <div className='d-flex flex-column '>
                     <div className='d-flex'>
                       <img src={username.image} alt={username.id} height={'50px'} className='me-2 rounded-circle '/>
@@ -134,7 +141,7 @@ const MyNav = () => {
                     </div>
                     <Button className='p-0' variant="outline-primary">Visualizza profilo</Button>
                   </div>
-                </NavDropdown.Item>
+                </Link>
                 <NavDropdown.Divider />
                 <h6 className='ms-3'>Account</h6>
                 <NavDropdown.Item href="#action/3.2" className='fw-lighter' style={{fontSize: '0.9em'}}>
@@ -153,9 +160,9 @@ const MyNav = () => {
                   Account per la pubblicazione di offerte
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.5" className='fw-lighter' style={{fontSize: '0.9em'}}>
+                <Button href="#action/3.5" className='fw-lighter dropdown-item' style={{fontSize: '0.9em'}}>
                   Esci
-                </NavDropdown.Item>
+                </Button>
               </NavDropdown>
             </div>
             )  }

@@ -15,6 +15,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 
 function App() {
+  const userSelector = (state) => state.user.user
+  const idSelector = (state) => state.idUser.user
   return (
     <BrowserRouter>
       <div className="bg-background">
@@ -28,7 +30,7 @@ function App() {
                 <>
                   <Row>
                     <Col md={8} lg={8}>
-                      <Mainprofile />
+                      <Mainprofile selector={userSelector}/>
                       <Experiences />
                     </Col>
                     <Col>
@@ -40,7 +42,20 @@ function App() {
                 </>
               }
             />
-
+            <Route path="/profile/:userId" element={
+              <>
+                <Row>
+                  <Col md={8} lg={8}>
+                    <Mainprofile selector={idSelector}/>
+                    <Experiences />
+                  </Col>
+                  <Col>
+                    <MyAside />
+                  </Col>
+                </Row>
+                <MSGbar />
+                <Footer />
+                </>} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Container>
