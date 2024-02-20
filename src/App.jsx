@@ -1,15 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../src/assets/main.css";
+import "./App.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import MyAside from "./components/MyAside";
 import Mainprofile from "./components/Mainprofile";
 import { Col, Container, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
-import MyNav from './components/MyNav'
+import MyNav from "./components/MyNav";
+import Footer from "./components/Footer";
+import MSGbar from "./components/MSGbar";
 
 function App() {
-
   return (
     <div className="bg-background">
       <MyNav />
@@ -22,6 +24,8 @@ function App() {
             <MyAside />
           </Col>
         </Row>
+        <MSGbar />
+        <Footer />
       </Container>
     </div>
   );
