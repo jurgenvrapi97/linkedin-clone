@@ -2,12 +2,11 @@
 @import "~bootstrap/scss/variables";
 
 $new-theme-colors: (
-  "primary": rgb(117, 80, 254),
+  "primary": rgb(0, 102, 153),
   "bt-main-color": rgb(26, 203, 152),
   "background": rgb(244, 242, 238),
   "orange": rgb(202, 118, 7),
-
-  );
+);
 
 $theme-colors: map-merge($theme-colors, $new-theme-colors);
 

@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <Container>
+    <Container className="mt-5 pb-4">
       <Row className="text-secondary">
         <Col xs={12} md={6}>
           <Row>

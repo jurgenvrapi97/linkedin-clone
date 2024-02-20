@@ -12,7 +12,7 @@
 }
 .a:hover {
   text-decoration: underline;
-  color: rgb(117, 117, 255);
+  color: rgb(63, 124, 255);
 }
 
 .b {
@@ -20,7 +20,7 @@
 }
 
 .s {
-  height: 500px;
+  height: 650px;
   position: fixed;
   right: 40px;
   bottom: 0;
@@ -43,4 +43,86 @@
   min-height: 65px;
   -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+}
+.bg-c {
+  background-color: rgb(239, 239, 239);
+}
+.d {
+  width: 200px;
+}
+.m {
+  height: 400px;
+}
+.mc {
+  position: absolute;
+}
+.xx {
+  width: 300px;
+  height: 500px;
+  position: fixed;
+  bottom: 0;
+  right: 400px;
+  -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+}
+
+.xl {
+  width: 450px;
+  height: 650px;
+  position: fixed;
+  bottom: 0;
+  right: 400px;
+  -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+}
+.i {
+  width: 30px;
+}
+/* home */
+.i-h {
+  width: 55px;
+  bottom: -20px;
+}
+.c-i {
+  height: 60px;
+}
+.c-blue {
+  text-decoration: none;
+  color: rgb(63, 124, 255);
+}
+.p:hover {
+  text-decoration: underline;
+  color: rgb(63, 124, 255);
+}
+.fs-sm {
+  font-size: 0.7rem;
+}
+.h-grey:hover {
+  background-color: lightgray;
+}
+.name-underline {
+  text-decoration: none;
+}
+.name-underline:hover {
+  text-decoration: underline;
+}
+
+.b-h {
+  font-size: 0.9rem;
+}
+
+.b-h:hover {
+  background-color: lightgray !important;
+}
+.s-art {
+  height: 600px;
+  overflow: scroll;
+}
+.s-art-min {
+  height: 300px;
+  overflow: hidden;
+}
+.p-li {
+  font-weight: normal;
+  font-size: 0.8rem;
 }
