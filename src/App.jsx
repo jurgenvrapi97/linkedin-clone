@@ -10,6 +10,7 @@ import "bootstrap-icons/font/bootstrap-icons.min.css";
 import MyNav from "./components/MyNav";
 import Footer from "./components/Footer";
 import MSGbar from "./components/MSGbar";
+import Experiences from "./components/Experiences";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Row>
           <Col md={8} lg={8}>
             <Mainprofile />
+            <Experiences />
           </Col>
           <Col>
             <MyAside />
