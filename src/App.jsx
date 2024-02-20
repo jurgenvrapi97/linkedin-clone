@@ -7,7 +7,6 @@ import { Col, Container, Row } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import MyNav from './components/MyNav'
-import AddExp from './components/AddExp'
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
         <Row>
           <Col md={8} lg={8}>
             <Mainprofile />
-            <AddExp />
           </Col>
           <Col>
             <MyAside />
