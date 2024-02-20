@@ -174,7 +174,7 @@ const MSGbar = () => {
               placeholder="Digita un nome o più nomi"
               aria-label="Digita un nome o più nomi"
               aria-describedby="basic-addon1"
-              className="border-0 "
+              className="border-black border-2 rounded-5"
             />
           </InputGroup>
           <hr className="m-0" />

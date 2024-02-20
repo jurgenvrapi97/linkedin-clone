@@ -1,10 +1,10 @@
-import { FETCH_USER_GENERIC } from '../action'
+import { FETCH_USER_GENERIC } from "../action";
 
 const initialState = {
-  user: {},
+  user: [],
 
   error: null,
-}
+};
 
 const userGenericReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -12,11 +12,11 @@ const userGenericReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
-      }
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default userGenericReducer
+export default userGenericReducer;
