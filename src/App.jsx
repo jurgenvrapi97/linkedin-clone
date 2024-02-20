@@ -6,10 +6,10 @@ import Mainprofile from "./components/Mainprofile";
 import { Col, Container, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
-import MyNav from './components/MyNav'
+import MyNav from "./components/MyNav";
+import Experiences from "./components/Experiences";
 
 function App() {
-
   return (
     <div className="bg-background">
       <MyNav />
@@ -17,6 +17,7 @@ function App() {
         <Row>
           <Col md={8} lg={8}>
             <Mainprofile />
+            <Experiences />
           </Col>
           <Col>
             <MyAside />
