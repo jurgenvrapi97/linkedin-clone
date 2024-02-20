@@ -12,7 +12,7 @@
 }
 .a:hover {
   text-decoration: underline;
-  color: rgb(117, 117, 255);
+  color: rgb(63, 124, 255);
 }
 
 .b {
@@ -77,4 +77,52 @@
 }
 .i {
   width: 30px;
+}
+/* home */
+.i-h {
+  width: 55px;
+  bottom: -20px;
+}
+.c-i {
+  height: 60px;
+}
+.c-blue {
+  text-decoration: none;
+  color: rgb(63, 124, 255);
+}
+.p:hover {
+  text-decoration: underline;
+  color: rgb(63, 124, 255);
+}
+.fs-sm {
+  font-size: 0.7rem;
+}
+.h-grey:hover {
+  background-color: lightgray;
+}
+.name-underline {
+  text-decoration: none;
+}
+.name-underline:hover {
+  text-decoration: underline;
+}
+
+.b-h {
+  font-size: 0.9rem;
+}
+
+.b-h:hover {
+  background-color: lightgray !important;
+}
+.s-art {
+  height: 600px;
+  overflow: scroll;
+}
+.s-art-min {
+  height: 300px;
+  overflow: hidden;
+}
+.p-li {
+  font-weight: normal;
+  font-size: 0.8rem;
 }
