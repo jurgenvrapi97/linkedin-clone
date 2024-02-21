@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
-const Home = () => {
+const Home = ({ selector }) => {
   const [show, setShow] = useState(false);
   const [showArticle, setShowArticle] = useState(false);
 
@@ -11,10 +12,12 @@ const Home = () => {
   const toggleShowViewMoreArticles = () => {
     setShowArticle((prevState) => !prevState);
   };
+  const profile = useSelector(selector);
   return (
     <>
       <Container>
-        <Row>
+        <Row className="mt-5">
+          {/* sezione card sx */}
           <Col xs={12} md={3}>
             <Row className="g-2 flex-column ">
               <Col>
@@ -35,11 +38,11 @@ const Home = () => {
                   <Card.Body className="p-0 mt-2 ">
                     <Card.Title className="text-center pt-4">
                       <a href="#" className="text-black name-underline">
-                        Nome Profilo
+                        {profile.name ? profile.name : "Loggati"}
                       </a>
                     </Card.Title>
                     <Card.Text className="text-center fs-sm">
-                      *studente presso...
+                      {profile.bio}
                     </Card.Text>
                     <hr className="m-0" />
                     <ListGroup variant="flush">
@@ -129,12 +132,9 @@ const Home = () => {
               </Button>
             </Row>
           </Col>
-          <Col>
-            <Row>
-              {/* sezione post */}
-              <Col xs={6}></Col>
-            </Row>
-          </Col>
+          {/* sezione post centrale*/}
+          <Col xs={12} md={6}></Col>
+          {/* sezione card dx */}
           <Col xs={3}>
             <div className="border border-1 rounded-2 bg-white">
               <div className={showArticle ? "s-art p-3" : "s-art-min p-3"}>
