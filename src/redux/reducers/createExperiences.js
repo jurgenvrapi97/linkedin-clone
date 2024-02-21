@@ -1,4 +1,4 @@
-import { CREATE_EXPERINCES } from '../action'
+import { CREATE_EXPERIENCES } from '../action'
 
 const initialState = {
   newExperiences: [],
@@ -6,7 +6,7 @@ const initialState = {
 
 const createreducer = (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_EXPERINCES:
+    case CREATE_EXPERIENCES:
       return {
         ...state,
         experiences: [...state.newExperiences, action.payload],
