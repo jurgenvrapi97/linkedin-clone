@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchExperiencesCreate } from "../redux/action";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Col, Container, Row } from "react-bootstrap";
@@ -16,19 +15,19 @@ const ModaleModificaExperience = ({ chiave }) => {
   });
 
   const modificaQuestoCommento = useSelector((state) => state.action.data);
-  console.log(modificaQuestoCommento);
 
-  const sicuroDiVolerModificare = () => {
-    console.log(modificaQuestoCommento);
-    setForm({
-      role: modificaQuestoCommento.role,
-      company: modificaQuestoCommento.company,
-      startDate: modificaQuestoCommento.startDate,
-      endDate: modificaQuestoCommento.endDate,
-      description: modificaQuestoCommento.description,
-      area: modificaQuestoCommento.area,
-    });
-  };
+  useEffect(() => {
+    if (modificaQuestoCommento) {
+      setForm({
+        role: modificaQuestoCommento.role,
+        company: modificaQuestoCommento.company,
+        startDate: modificaQuestoCommento.startDate,
+        endDate: modificaQuestoCommento.endDate,
+        description: modificaQuestoCommento.description,
+        area: modificaQuestoCommento.area,
+      });
+    }
+  }, [modificaQuestoCommento]);
 
   const [form, setForm] = useState({
     role: "",
@@ -45,15 +44,26 @@ const ModaleModificaExperience = ({ chiave }) => {
   const handleShow = () => {
     setShow(true),
       dispatch(
-        fetchExperiencesAction(tokens.jurgen, username._id, chiave, "GET")
+        fetchExperiencesAction(
+          tokens[username.name.toLowerCase()],
+          username._id,
+          chiave,
+          "GET"
+        )
       );
-
-    if (modificaQuestoCommento) {
-      console.log("sono dentro");
-    } else {
-      console.log("modificaQuestoCommento è null");
-    }
   };
+
+  const experiences = useSelector((state) => state.experiences.allExperiences);
+  useEffect(() => {
+    dispatch(
+      fetchExperiencesAction(
+        tokens[username.name.toLowerCase()],
+        username._id,
+        chiave,
+        "GET"
+      )
+    );
+  }, [experiences]);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -67,7 +77,44 @@ const ModaleModificaExperience = ({ chiave }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setShow(false);
-    dispatch(fetchExperiencesCreate(tokens.jurgen, username._id, form));
+    dispatch(
+      fetchExperiencesAction(
+        tokens[username.name.toLowerCase()],
+        username._id,
+        chiave,
+        "PUT",
+        form
+      )
+    );
+  };
+
+  const [file, setFile] = useState();
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    let formData = new FormData();
+
+    formData.append("experience", file);
+
+    try {
+      let response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${username._id}/experiences/${chiave}/picture`,
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: "Bearer" + tokens[username.name.toLowerCase()],
+          },
+        }
+      );
+      let data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -78,9 +125,6 @@ const ModaleModificaExperience = ({ chiave }) => {
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header className="bg-background" closeButton>
-          <Button onClick={() => sicuroDiVolerModificare}>
-            Sei sicuro di voler modificare?
-          </Button>
           <Modal.Title>Inserisci una nuova esperienza</Modal.Title>
         </Modal.Header>
         <Container className="py-2">
@@ -153,6 +197,10 @@ const ModaleModificaExperience = ({ chiave }) => {
                   onChange={handleChange}
                 />
               </Col>
+              <div>
+                <input type="file" onChange={handleFileChange} />
+                <button onClick={handleUpload}>Carica</button>
+              </div>
             </Row>
             <Row className="justify-content-end">
               <Col className="col-3 d-flex justify-content-end">

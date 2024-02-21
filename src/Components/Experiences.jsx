@@ -21,25 +21,21 @@ const Experiences = () => {
   const tokens = useSelector((state) => state.user.tokens);
   const profile = useSelector((state) => state.user.user);
   const experiences = useSelector((state) => state.experiences.allExperiences);
+  const newExperience = useSelector((state) => state.create.experiences);
+  // const nienteData = useSelector((state) => state.action.data);
+  // console.log("niente", nienteData);
 
   useEffect(() => {
     if (profile._id) {
       dispatch(fetchExperiences(tokens.jurgen, profile._id));
       console.log("partita");
     }
-  }, [dispatch, profile._id]);
+  }, [dispatch, profile._id, newExperience, experiences.length]);
 
   const handleDelete = (chiave) => {
     dispatch(
       fetchExperiencesAction(tokens.jurgen, profile._id, chiave, "DELETE")
     );
-  };
-
-  const handleEdit = (chiave) => {
-    dispatch(fetchExperiencesAction(tokens.jurgen, profile._id, chiave, "GET"));
-  };
-  const handleChanges = (chiave) => {
-    dispatch(fetchExperiencesAction(tokens.jurgen, profile._id, chiave, "PUT"));
   };
 
   return (
@@ -55,7 +51,7 @@ const Experiences = () => {
                 <ListGroup>
                   <ListGroup.Item className="border border-0 d-flex">
                     <div>
-                      <img src="https://placekitten.com/200"></img>
+                      <img src={exp.image}></img>
                     </div>
 
                     <div className=" ms-3 ">
