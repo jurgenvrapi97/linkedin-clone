@@ -21,16 +21,18 @@ const Mainprofile = ({ selector }) => {
             className="img-fluid"
             src="https://placebear.com/900/400"
           />
+          <div className="overflow-hidden">
+            <img
+              src={profile.image}
+              className="rounded-circle position-absolute bottom-vai-sotto start-0 ms-3 mw-100 border border-light border-5 "
+              width={"150px"}
+              height={"150px"}
+            />
+          </div>
 
-          <img
-            src={profile.image}
-            className="rounded-circle position-absolute bottom-vai-sotto start-5 img-fluid mw-100 border border-light border-5"
-            width={"150px"}
-            height={"150px"}
-          />
         </div>
 
-        <Card.Body className="pt-5 ">
+        <Card.Body className="pt-5 mt-3">
           <Row>
             <Col xs={8}>
               <Card.Title>

@@ -119,13 +119,13 @@ const ModaleModificaExperience = ({ chiave }) => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        <i className="bi bi-plus-circle-fill"></i>
+      <Button variant="outline-secondary" className="border border-0 rounded-circle" onClick={handleShow}>
+      <i className="bi bi-pencil fs-5"></i>
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header className="bg-background" closeButton>
-          <Modal.Title>Inserisci una nuova esperienza</Modal.Title>
+          <Modal.Title>Modifica esperienza</Modal.Title>
         </Modal.Header>
         <Container className="py-2">
           <form onSubmit={handleSubmit}>
@@ -197,9 +197,9 @@ const ModaleModificaExperience = ({ chiave }) => {
                   onChange={handleChange}
                 />
               </Col>
-              <div>
-                <input type="file" onChange={handleFileChange} />
-                <button onClick={handleUpload}>Carica</button>
+              <div className="d-flex justify-content-around mt-2">
+                <input aria-describedby="inputGroupFileAddon04" aria-label="Upload" type="file" className="form-control w-75" onChange={handleFileChange} />
+                <Button variant="outline-primary" onClick={handleUpload}>Carica</Button>
               </div>
             </Row>
             <Row className="justify-content-end">

@@ -8,11 +8,13 @@ import {
   Container,
   ListGroup,
   Row,
+  Spinner,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FooterHome from "./FooterHome";
 import PostHome from "./PostHome";
 import { fetchAllPosts } from "../redux/action";
+import { Link } from "react-router-dom";
 
 const Home = ({ selector }) => {
   const [show, setShow] = useState(false);
@@ -37,7 +39,7 @@ const Home = ({ selector }) => {
 
   return (
     <>
-      <Container>
+      <Container style={{paddingTop: '3em'}}>
         <Row className="mt-5">
           {/* sezione card sx */}
           <Col xs={12} md={3}>
@@ -59,9 +61,9 @@ const Home = ({ selector }) => {
                   </div>
                   <Card.Body className="p-0 mt-2 ">
                     <Card.Title className="text-center pt-4">
-                      <a href="#" className="text-black name-underline">
+                      <Link to='/profile' href="#" className="text-black name-underline">
                         {profile.name ? profile.name : "Loggati"}
-                      </a>
+                      </Link>
                     </Card.Title>
                     <Card.Text className="text-center fs-sm">
                       {profile.bio}
@@ -239,17 +241,17 @@ const Home = ({ selector }) => {
                   {allPosts.length > 0 ? (
                     allPosts.slice(15, 45).map((post) => {
                       return (
-                        <>
-                          <PostHome key={post._id} post={post} />
+                        <div key={post._id}>
+                          <PostHome  post={post} />
                           <div className="px-5">
                             <hr />
                           </div>
-                        </>
+                        </div>
                       );
                     })
                   ) : (
                     <>
-                      <h1>Nessun post creato</h1>
+                      <Spinner animation="border" />;
                     </>
                   )}
                 </ListGroup>

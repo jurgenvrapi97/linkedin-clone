@@ -1,4 +1,5 @@
 export const FETCH_USER_PROFILE = "FETCH_USER_PROFILE";
+export const DELETE_USER_PROFILE = "DELETE_USER_PROFILE";
 export const FETCH_USER_GENERIC = "FETCH_USER_GENERIC";
 export const FETCH_USER_ID = "FETCH_USER_ID";
 export const FETCH_EXPERIENCES = "FETCH_EXPERIENCES";
@@ -26,6 +27,14 @@ export const fetchProfile = (token) => {
     const data = await response.json();
 
     dispatch({ type: FETCH_USER_PROFILE, payload: data });
+  };
+};
+
+// AZIONE PER FARE LOG OUT
+
+export const logOutAction = () => {
+  return {
+    type: DELETE_USER_PROFILE,
   };
 };
 

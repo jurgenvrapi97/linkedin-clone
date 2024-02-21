@@ -1,4 +1,4 @@
-import { FETCH_USER_PROFILE } from "../action";
+import { FETCH_USER_PROFILE, DELETE_USER_PROFILE } from "../action";
 
 const initialState = {
   user: "",
@@ -25,6 +25,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+      };
+
+    case DELETE_USER_PROFILE:
+      return {
+        ...state,
+        user: "",
       };
 
     default:

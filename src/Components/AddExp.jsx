@@ -53,8 +53,8 @@ const AddExp = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        <i className="bi bi-plus-circle-fill"></i>
+      <Button variant="outline-secondary" className="border border-0 rounded-circle" onClick={handleShow}>
+      <i className="bi bi-plus-lg fs-5"></i>
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
