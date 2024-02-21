@@ -1,7 +1,7 @@
 import { FETCH_POSTS } from "../action";
 
 const initialState = {
-  allPosts: {},
+  allPosts: [],
 
   error: null,
 };
@@ -11,7 +11,7 @@ const allPosts = (state = initialState, action) => {
     case FETCH_POSTS:
       return {
         ...state,
-        allExperiences: action.payload,
+        allPosts: action.payload,
       };
 
     default:

@@ -188,7 +188,6 @@ export const fetchAllPosts = (token) => {
     }
 
     const data = await response.json();
-    console.log(data);
 
     dispatch({ type: FETCH_POSTS, payload: data });
   };
