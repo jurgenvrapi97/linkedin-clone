@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, Card, CardBody, Form, Col, Container, ListGroup, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import FooterHome from "./FooterHome";
 
 const Home = ({ selector }) => {
   const [show, setShow] = useState(false);
@@ -262,76 +263,82 @@ const Home = ({ selector }) => {
           </Col>
           {/* sezione card dx */}
           <Col xs={3}>
-            <div className="border border-1 rounded-2 bg-white">
-              <div className={showArticle ? "s-art p-3" : "s-art-min p-3"}>
-                <div className="d-flex justify-content-between ">
-                  <h5>LinkedIn Notizie</h5>
-                  <i className="bi bi-info-square-fill text-black"></i>
+            <Col>
+              <div className="border border-1 rounded-2 bg-white">
+                <div className={showArticle ? "s-art p-3" : "s-art-min p-3"}>
+                  <div className="d-flex justify-content-between ">
+                    <h5>LinkedIn Notizie</h5>
+                    <i className="bi bi-info-square-fill text-black"></i>
+                  </div>
+                  <div>
+                    {/* lista notizie */}
+                    <ul className="m-0  px-3">
+                      <li className="fw-bold">
+                        Top Voices Lavoro: 6 temi da approffondire
+                        <p className="p-li">Notizie principali</p>
+                      </li>
+                      <li className="fw-bold">
+                        Come si costruisce un leadreship
+                        <p className="p-li">4 giorni fa</p>
+                      </li>
+                      <li className="fw-bold">
+                        Il richiamo della montagna
+                        <p className="p-li">18 ore fa</p>
+                      </li>
+                      <li className="fw-bold">
+                        Allarme smog in Pianura Padana
+                        <p className="p-li">37 min fa</p>
+                      </li>
+                      <li className="fw-bold">
+                        Come se le passano i pendolari
+                        <p className="p-li">3 giorni fa</p>
+                      </li>
+                      <li className="fw-bold">
+                        Come si costruisce un leadreship
+                        <p className="p-li">4 giorni fa</p>
+                      </li>
+                      <li className="fw-bold">
+                        Come si costruisce un leadreship
+                        <p className="p-li">4 giorni fa</p>
+                      </li>
+                      <li className="fw-bold">
+                        Come si costruisce un leadreship
+                        <p className="p-li">4 giorni fa</p>
+                      </li>
+                      <li className="fw-bold">
+                        Come si costruisce un leadreship
+                        <p className="p-li">4 giorni fa</p>
+                      </li>
+                      <li className="fw-bold">
+                        Come si costruisce un leadreship
+                        <p className="p-li">4 giorni fa</p>
+                      </li>
+                      <li className="fw-bold">
+                        Come si costruisce un leadreship
+                        <p className="p-li">4 giorni fa</p>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
                 <div>
-                  {/* lista notizie */}
-                  <ul className="m-0  px-3">
-                    <li className="fw-bold">
-                      Top Voices Lavoro: 6 temi da approffondire
-                      <p className="p-li">Notizie principali</p>
-                    </li>
-                    <li className="fw-bold">
-                      Come si costruisce un leadreship
-                      <p className="p-li">4 giorni fa</p>
-                    </li>
-                    <li className="fw-bold">
-                      Il richiamo della montagna
-                      <p className="p-li">18 ore fa</p>
-                    </li>
-                    <li className="fw-bold">
-                      Allarme smog in Pianura Padana
-                      <p className="p-li">37 min fa</p>
-                    </li>
-                    <li className="fw-bold">
-                      Come se le passano i pendolari
-                      <p className="p-li">3 giorni fa</p>
-                    </li>
-                    <li className="fw-bold">
-                      Come si costruisce un leadreship
-                      <p className="p-li">4 giorni fa</p>
-                    </li>
-                    <li className="fw-bold">
-                      Come si costruisce un leadreship
-                      <p className="p-li">4 giorni fa</p>
-                    </li>
-                    <li className="fw-bold">
-                      Come si costruisce un leadreship
-                      <p className="p-li">4 giorni fa</p>
-                    </li>
-                    <li className="fw-bold">
-                      Come si costruisce un leadreship
-                      <p className="p-li">4 giorni fa</p>
-                    </li>
-                    <li className="fw-bold">
-                      Come si costruisce un leadreship
-                      <p className="p-li">4 giorni fa</p>
-                    </li>
-                    <li className="fw-bold">
-                      Come si costruisce un leadreship
-                      <p className="p-li">4 giorni fa</p>
-                    </li>
-                  </ul>
+                  <Button
+                    className=" text-secondary bg-transparent border-0 mb-2 b-h fw-bold ps-3"
+                    onClick={toggleShowViewMoreArticles}
+                  >
+                    {showArticle ? "Meno dettagli" : "Vedi altro"}
+                    {showArticle ? (
+                      <i className="bi bi-caret-up-fill ps-2"></i>
+                    ) : (
+                      <i className="bi bi-caret-down-fill ps-2"></i>
+                    )}
+                  </Button>
                 </div>
               </div>
-              <div>
-                <Button
-                  className=" text-secondary bg-transparent border-0 mb-2 b-h fw-bold ps-3"
-                  onClick={toggleShowViewMoreArticles}
-                >
-                  {showArticle ? "Meno dettagli" : "Vedi altro"}
-                  {showArticle ? (
-                    <i className="bi bi-caret-up-fill ps-2"></i>
-                  ) : (
-                    <i className="bi bi-caret-down-fill ps-2"></i>
-                  )}
-                </Button>
-              </div>
-            </div>
+            </Col>
+            <Col>
+              <hr />
+              <FooterHome />
+            </Col>
           </Col>
         </Row>
       </Container>
