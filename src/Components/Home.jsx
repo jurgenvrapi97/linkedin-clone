@@ -63,11 +63,7 @@ const Home = ({ selector, tokenKey }) => {
 
   return (
     <>
-<<<<<<< HEAD
       <Container style={{ paddingTop: "3em" }} className="pb-5">
-=======
-      <Container style={{ paddingTop: "3em" }}>
->>>>>>> main
         <Row className="mt-5">
           {/* sezione card sx */}
           <Col xs={12} md={3}>
@@ -209,21 +205,6 @@ const Home = ({ selector, tokenKey }) => {
                       )}
                     </div>
 
-<<<<<<< HEAD
-                    <div className="w-100">
-                      <Form>
-                        <Row>
-                          <Col>
-                            <Form.Control
-                              className="rounded-5 fw-medium"
-                              placeholder="Avvia un post"
-                              style={{ fontSize: "0.8em", padding: "1.1em" }}
-                            />
-                          </Col>
-                        </Row>
-                      </Form>
-                    </div>
-=======
                     <Button
                       onSubmit={handleSubmit}
                       className="bg-transparent w-100 text text-dark"
@@ -287,7 +268,6 @@ const Home = ({ selector, tokenKey }) => {
                         </Col>
                       </Row>
                     </Button>
->>>>>>> main
                   </ListGroup.Item>
                 </ListGroup>
               </CardBody>
