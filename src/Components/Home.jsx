@@ -18,7 +18,17 @@ import { fetchAllPosts, fetchCreatePost } from "../redux/action";
 import { Link } from "react-router-dom";
 
 const Home = ({ selector, tokenKey }) => {
-  const [inputPost, setInputPost] = useState("");
+  const [inputPost, setInputPost] = useState({
+    text: "",
+  });
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setInputPost({
+      ...inputPost,
+      text: value,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -217,37 +227,33 @@ const Home = ({ selector, tokenKey }) => {
                                 </Modal.Title>
                               </Modal.Header>
                               <Modal.Body>
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="exampleForm.ControlTextarea1"
-                                >
-                                  <Form.Control
-                                    as="textarea"
-                                    rows={6}
-                                    className="border border-0"
-                                    placeholder="Di cosa vorresti parlare?"
-                                    value={inputPost}
-                                    onChange={(e) =>
-                                      setInputPost(e.target.value)
-                                    }
-                                  />
-                                </Form.Group>
+                                <Form onSubmit={handleSubmit}>
+                                  <Form.Group
+                                    className="mb-3"
+                                    controlId="exampleForm.ControlTextarea1"
+                                  >
+                                    <Form.Control
+                                      as="textarea"
+                                      rows={6}
+                                      className="border border-0"
+                                      placeholder="Di cosa vorresti parlare?"
+                                      value={inputPost.text}
+                                      onChange={handleChange}
+                                    />
+                                  </Form.Group>
+                                  <Modal.Footer>
+                                    <Button
+                                      variant="secondary"
+                                      onClick={handleClose}
+                                    >
+                                      Close
+                                    </Button>
+                                    <Button type="submit" variant="primary">
+                                      Save Changes
+                                    </Button>
+                                  </Modal.Footer>
+                                </Form>
                               </Modal.Body>
-                              <Modal.Footer>
-                                <Button
-                                  variant="secondary"
-                                  onClick={handleClose}
-                                >
-                                  Close
-                                </Button>
-                                <Button
-                                  type="submit"
-                                  variant="primary"
-                                  onClick={(handleClose, handleSubmit)}
-                                >
-                                  Save Changes
-                                </Button>
-                              </Modal.Footer>
                             </Modal>
                           </Col>
                         </Row>

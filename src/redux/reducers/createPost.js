@@ -9,7 +9,7 @@ const createPostReducer = (state = initialState, action) => {
     case CREATE_POST:
       return {
         ...state,
-        experiences: [...state.createPost, action.payload],
+        createPost: action.payload,
       };
 
     default:
