@@ -238,7 +238,7 @@ export const fetchCreatePost = (token, post) => {
 export const fetchPostAction = (token, postId, method, exp = null) => {
   return async (dispatch) => {
     const options = {
-      method,
+      method: `${method}`,
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
