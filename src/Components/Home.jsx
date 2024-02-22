@@ -201,64 +201,65 @@ const Home = ({ selector, tokenKey }) => {
                       )}
                     </div>
 
-                    <div className="w-100">
-                      <Button onSubmit={handleSubmit}>
-                        <Row>
-                          <Col>
-                            <div
-                              className="rounded-5 fw-medium"
-                              placeholder="Avvia un post"
-                              style={{ fontSize: "0.8em", padding: "1.1em" }}
-                              onClick={handleShow}
-                              value={inputPost}
-                            />
+                    <Button
+                      onSubmit={handleSubmit}
+                      className="bg-transparent w-100 text text-dark"
+                    >
+                      <Row>
+                        <Col>
+                          <div
+                            className="rounded-5 fw-medium"
+                            placeholder="Avvia un post"
+                            style={{ fontSize: "0.8em", padding: "1.1em" }}
+                            onClick={handleShow}
+                            value={inputPost}
+                          />
 
-                            <Modal show={show} onHide={handleClose}>
-                              <Modal.Header closeButton>
-                                <Modal.Title>
-                                  <img
-                                    src={profile.image}
-                                    alt="logo"
-                                    className="rounded-circle me-3"
-                                    height="30px"
-                                    width="30px"
+                          <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                              <Modal.Title>
+                                <img
+                                  src={profile.image}
+                                  alt="logo"
+                                  className="rounded-circle me-3"
+                                  height="30px"
+                                  width="30px"
+                                />
+                                {profile.name}
+                              </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                              <Form onSubmit={handleSubmit}>
+                                <Form.Group
+                                  className="mb-3"
+                                  controlId="exampleForm.ControlTextarea1"
+                                >
+                                  <Form.Control
+                                    as="textarea"
+                                    rows={6}
+                                    className="border border-0"
+                                    placeholder="Di cosa vorresti parlare?"
+                                    value={inputPost.text}
+                                    onChange={handleChange}
                                   />
-                                  {profile.name}
-                                </Modal.Title>
-                              </Modal.Header>
-                              <Modal.Body>
-                                <Form onSubmit={handleSubmit}>
-                                  <Form.Group
-                                    className="mb-3"
-                                    controlId="exampleForm.ControlTextarea1"
+                                </Form.Group>
+                                <Modal.Footer>
+                                  <Button
+                                    variant="secondary"
+                                    onClick={handleClose}
                                   >
-                                    <Form.Control
-                                      as="textarea"
-                                      rows={6}
-                                      className="border border-0"
-                                      placeholder="Di cosa vorresti parlare?"
-                                      value={inputPost.text}
-                                      onChange={handleChange}
-                                    />
-                                  </Form.Group>
-                                  <Modal.Footer>
-                                    <Button
-                                      variant="secondary"
-                                      onClick={handleClose}
-                                    >
-                                      Close
-                                    </Button>
-                                    <Button type="submit" variant="primary">
-                                      Save Changes
-                                    </Button>
-                                  </Modal.Footer>
-                                </Form>
-                              </Modal.Body>
-                            </Modal>
-                          </Col>
-                        </Row>
-                      </Button>
-                    </div>
+                                    Close
+                                  </Button>
+                                  <Button type="submit" variant="primary">
+                                    Save Changes
+                                  </Button>
+                                </Modal.Footer>
+                              </Form>
+                            </Modal.Body>
+                          </Modal>
+                        </Col>
+                      </Row>
+                    </Button>
                   </ListGroup.Item>
                 </ListGroup>
               </CardBody>
