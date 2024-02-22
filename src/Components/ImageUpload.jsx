@@ -1,5 +1,6 @@
 import { useState } from 'react'
-
+import { Col, Container, Row } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 function ImageUpload() {
   const [file, setFile] = useState()
 
@@ -32,10 +33,20 @@ function ImageUpload() {
   }
 
   return (
-    <div>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Carica</button>
-    </div>
+    <>
+      <Container>
+        <Row>
+          <Col className="m-2">
+            <input
+              className="d-block mb-5"
+              type="file"
+              onChange={handleFileChange}
+            />
+            <Button onClick={handleUpload}>Carica</Button>
+          </Col>
+        </Row>
+      </Container>
+    </>
   )
 }
 
