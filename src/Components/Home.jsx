@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 import {
   Button,
   Card,
@@ -10,56 +10,56 @@ import {
   Row,
   Spinner,
   Modal,
-} from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import FooterHome from "./FooterHome";
-import PostHome from "./PostHome";
-import { fetchAllPosts, fetchCreatePost } from "../redux/action";
-import { Link } from "react-router-dom";
+} from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import FooterHome from './FooterHome'
+import PostHome from './PostHome'
+import { fetchAllPosts, fetchCreatePost } from '../redux/action'
+import { Link } from 'react-router-dom'
 
 const Home = ({ selector, tokenKey }) => {
   const [inputPost, setInputPost] = useState({
-    text: "",
-  });
+    text: '',
+  })
 
   const handleChange = (event) => {
-    const value = event.target.value;
+    const value = event.target.value
     setInputPost({
       ...inputPost,
       text: value,
-    });
-  };
+    })
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("input", inputPost);
-    dispatch(fetchCreatePost(tokenKey, inputPost));
-  };
+    e.preventDefault()
+    console.log('input', inputPost)
+    dispatch(fetchCreatePost(tokenKey, inputPost))
+  }
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [show, setShow] = useState(false);
-  const [showArticle, setShowArticle] = useState(false);
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+  const [show, setShow] = useState(false)
+  const [showArticle, setShowArticle] = useState(false)
 
   const toggleShowViewMore = () => {
-    setShow((prevState) => !prevState);
-  };
+    setShow((prevState) => !prevState)
+  }
   const toggleShowViewMoreArticles = () => {
-    setShowArticle((prevState) => !prevState);
-  };
-  const profile = useSelector(selector);
-  const allPosts = useSelector((state) => state.allPosts.allPosts);
-  const dispatch = useDispatch();
-  const tokens = useSelector((state) => state.user.tokens);
+    setShowArticle((prevState) => !prevState)
+  }
+  const profile = useSelector(selector)
+  const allPosts = useSelector((state) => state.allPosts.allPosts)
+  const dispatch = useDispatch()
+  const tokens = useSelector((state) => state.user.tokens)
 
   useEffect(() => {
-    dispatch(fetchAllPosts(tokens.jurgen));
+    dispatch(fetchAllPosts(tokens.jurgen))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [dispatch])
 
   return (
     <>
-      <Container style={{ paddingTop: "3em" }}>
+      <Container style={{ paddingTop: '3em' }}>
         <Row className="mt-5">
           {/* sezione card sx */}
           <Col xs={12} md={3}>
@@ -77,8 +77,8 @@ const Home = ({ selector, tokenKey }) => {
                         src={profile.image}
                         alt="image-profile"
                         className=" rounded-circle position-absolute i-h border  border-2 border-white"
-                        width={"60px"}
-                        height={"60px"}
+                        width={'60px'}
+                        height={'60px'}
                       />
                     )}
                   </div>
@@ -89,7 +89,7 @@ const Home = ({ selector, tokenKey }) => {
                         href="#"
                         className="text-black name-underline"
                       >
-                        {profile.name ? profile.name : "Loggati"}
+                        {profile.name ? profile.name : 'Loggati'}
                       </Link>
                     </Card.Title>
                     <Card.Text className="text-center fs-sm">
@@ -168,13 +168,13 @@ const Home = ({ selector, tokenKey }) => {
                   </div>
                 </Col>
               ) : (
-                ""
+                ''
               )}
               <Button
                 className=" text-secondary bg-transparent border-0 mb-2 b-h fw-bold"
                 onClick={toggleShowViewMore}
               >
-                {show ? "Meno dettagli" : "Vedi altro"}
+                {show ? 'Meno dettagli' : 'Vedi altro'}
                 {show ? (
                   <i className="bi bi-caret-up-fill ps-2"></i>
                 ) : (
@@ -210,7 +210,7 @@ const Home = ({ selector, tokenKey }) => {
                           <div
                             className="rounded-5 fw-medium"
                             placeholder="Avvia un post"
-                            style={{ fontSize: "0.8em", padding: "1.1em" }}
+                            style={{ fontSize: '0.8em', padding: '1.1em' }}
                             onClick={handleShow}
                             value={inputPost}
                           />
@@ -229,7 +229,7 @@ const Home = ({ selector, tokenKey }) => {
                               </Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                              <Form onSubmit={handleSubmit}>
+                              <Form>
                                 <Form.Group
                                   className="mb-3"
                                   controlId="exampleForm.ControlTextarea1"
@@ -278,7 +278,7 @@ const Home = ({ selector, tokenKey }) => {
                   </svg>
                   <p
                     className="m-0 fw-medium text-secondary"
-                    style={{ fontSize: "0.9em" }}
+                    style={{ fontSize: '0.9em' }}
                   >
                     Contenuti multimediali
                   </p>
@@ -298,7 +298,7 @@ const Home = ({ selector, tokenKey }) => {
                   </svg>
                   <p
                     className="m-0 fw-medium text-secondary"
-                    style={{ fontSize: "0.9em" }}
+                    style={{ fontSize: '0.9em' }}
                   >
                     Evento
                   </p>
@@ -317,7 +317,7 @@ const Home = ({ selector, tokenKey }) => {
                   </svg>
                   <p
                     className="m-0 fw-medium text-secondary"
-                    style={{ fontSize: "0.9em" }}
+                    style={{ fontSize: '0.9em' }}
                   >
                     Scrivi un articolo
                   </p>
@@ -325,15 +325,17 @@ const Home = ({ selector, tokenKey }) => {
               </div>
             </Card>
 
-            <Col className="d-flex flex-column " md={12} lg={12}>
+            <Col className="d-flex flex-column-reverse " md={12} lg={12}>
               {allPosts.length > 0 ? (
-                allPosts.slice(15, 45).map((post) => {
-                  return (
-                    <div key={post._id}>
-                      <PostHome post={post} />
-                    </div>
-                  );
-                })
+                allPosts
+                  .slice(allPosts.length - 50, allPosts.lenght)
+                  .map((post) => {
+                    return (
+                      <div key={post._id}>
+                        <PostHome post={post} />
+                      </div>
+                    )
+                  })
               ) : (
                 <>
                   <Spinner animation="border" />;
@@ -345,7 +347,7 @@ const Home = ({ selector, tokenKey }) => {
           <Col xs={12} md={3}>
             <Col>
               <div className="border border-1 rounded-2 bg-white">
-                <div className={showArticle ? "s-art p-3" : "s-art-min p-3"}>
+                <div className={showArticle ? 's-art p-3' : 's-art-min p-3'}>
                   <div className="d-flex justify-content-between ">
                     <h5>LinkedIn Notizie</h5>
                     <i className="bi bi-info-square-fill text-black"></i>
@@ -405,7 +407,7 @@ const Home = ({ selector, tokenKey }) => {
                     className=" text-secondary bg-transparent border-0 mb-2 b-h fw-bold ps-3"
                     onClick={toggleShowViewMoreArticles}
                   >
-                    {showArticle ? "Meno dettagli" : "Vedi altro"}
+                    {showArticle ? 'Meno dettagli' : 'Vedi altro'}
                     {showArticle ? (
                       <i className="bi bi-caret-up-fill ps-2"></i>
                     ) : (
@@ -423,6 +425,6 @@ const Home = ({ selector, tokenKey }) => {
         </Row>
       </Container>
     </>
-  );
-};
-export default Home;
+  )
+}
+export default Home

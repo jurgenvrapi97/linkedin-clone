@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchExperiencesCreate } from '../redux/action'
 import Button from 'react-bootstrap/Button'
@@ -8,6 +8,16 @@ import { fetchExperiences } from '../redux/action'
 
 const AddExp = () => {
   //state modale
+  const lastExp = useSelector(
+    (state) =>
+      state.create.newExperiences[state.create.newExperiences.length - 1]
+  )
+
+  if (lastExp) {
+    console.log(lastExp._id)
+    // Qui puoi chiamare la tua funzione per caricare l'immagine
+  }
+
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -36,11 +46,42 @@ const AddExp = () => {
       [name]: value,
     })
   }
+  const [file, setFile] = useState()
 
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0])
+  }
+
+  const handleUpload = async () => {
+    let formData = new FormData()
+
+    formData.append('experience', file)
+
+    try {
+      let response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${username._id}/experiences/${lastExp._id}/picture`,
+        {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Authorization: 'Bearer ' + tokens[username.name.toLowerCase()],
+          },
+        }
+      )
+      let data = await response.json()
+      console.log(data)
+      dispatch(
+        fetchExperiences(tokens[username.name.toLowerCase()], username._id)
+      )
+    } catch (error) {
+      console.error(error)
+    }
+  }
   const handleSubmit = async (event) => {
     event.preventDefault()
-    setShow(false)
+    // setShow(false)
     await dispatch(fetchExperiencesCreate(tokens.jurgen, username._id, form))
+
     dispatch(
       fetchExperiences(tokens[username.name.toLowerCase()], username._id)
     )
@@ -134,6 +175,16 @@ const AddExp = () => {
               </Col>
             </Row>
           </form>
+          <div className="d-flex justify-content-around mt-2">
+            <input
+              aria-describedby="inputGroupFileAddon04"
+              aria-label="Upload"
+              type="file"
+              className="form-control w-75"
+              onChange={handleFileChange}
+            />
+            <button onClick={handleUpload}>carica</button>
+          </div>
         </Container>
       </Modal>
     </>
