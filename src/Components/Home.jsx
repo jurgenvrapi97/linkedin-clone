@@ -32,14 +32,18 @@ const Home = ({ selector, tokenKey }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("input", inputPost);
     dispatch(fetchCreatePost(tokenKey, inputPost));
   };
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // parte sinistra
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
   const [showArticle, setShowArticle] = useState(false);
+
+  // parte centrale
+  const handleCloseModale = () => setShowModale(false);
+  const handleShowModale = () => setShowModale(true);
+  const [showModale, setShowModale] = useState(false);
 
   const toggleShowViewMore = () => {
     setShow((prevState) => !prevState);
@@ -211,11 +215,11 @@ const Home = ({ selector, tokenKey }) => {
                             className="rounded-5 fw-medium"
                             placeholder="Avvia un post"
                             style={{ fontSize: "0.8em", padding: "1.1em" }}
-                            onClick={handleShow}
+                            onClick={handleShowModale}
                             value={inputPost}
                           />
 
-                          <Modal show={show} onHide={handleClose}>
+                          <Modal show={showModale} onHide={handleCloseModale}>
                             <Modal.Header closeButton>
                               <Modal.Title>
                                 <img
@@ -246,11 +250,15 @@ const Home = ({ selector, tokenKey }) => {
                                 <Modal.Footer>
                                   <Button
                                     variant="secondary"
-                                    onClick={handleClose}
+                                    onClick={handleCloseModale}
                                   >
                                     Close
                                   </Button>
-                                  <Button type="submit" variant="primary">
+                                  <Button
+                                    type="submit"
+                                    variant="primary"
+                                    onClick={handleCloseModale}
+                                  >
                                     Save Changes
                                   </Button>
                                 </Modal.Footer>
