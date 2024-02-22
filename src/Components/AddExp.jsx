@@ -53,6 +53,7 @@ const AddExp = () => {
   }
 
   const handleUpload = async () => {
+    setShow(false)
     let formData = new FormData()
 
     formData.append('experience', file)
@@ -79,7 +80,7 @@ const AddExp = () => {
   }
   const handleSubmit = async (event) => {
     event.preventDefault()
-    setShow(false)
+
     await dispatch(
       fetchExperiencesCreate(
         tokens[username.name.toLowerCase()],
