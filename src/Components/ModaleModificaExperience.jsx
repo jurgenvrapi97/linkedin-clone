@@ -119,8 +119,12 @@ const ModaleModificaExperience = ({ chiave }) => {
 
   return (
     <>
-      <Button variant="outline-secondary" className="border border-0 rounded-circle" onClick={handleShow}>
-      <i className="bi bi-pencil fs-5"></i>
+      <Button
+        variant="outline-secondary"
+        className="border border-0 rounded-circle"
+        onClick={handleShow}
+      >
+        <i className="bi bi-pencil fs-5"></i>
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
@@ -198,8 +202,16 @@ const ModaleModificaExperience = ({ chiave }) => {
                 />
               </Col>
               <div className="d-flex justify-content-around mt-2">
-                <input aria-describedby="inputGroupFileAddon04" aria-label="Upload" type="file" className="form-control w-75" onChange={handleFileChange} />
-                <Button variant="outline-primary" onClick={handleUpload}>Carica</Button>
+                <input
+                  aria-describedby="inputGroupFileAddon04"
+                  aria-label="Upload"
+                  type="file"
+                  className="form-control w-75"
+                  onChange={handleFileChange}
+                />
+                <Button variant="outline-primary" onClick={handleUpload}>
+                  Carica
+                </Button>
               </div>
             </Row>
             <Row className="justify-content-end">
