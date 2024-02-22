@@ -2,7 +2,9 @@ import { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
-function ImageUpload() {
+
+
+function ImageUpload({ handleClose }) {
   const [file, setFile] = useState()
 
   const profile = useSelector((state) => state.user.user)
@@ -46,6 +48,7 @@ function ImageUpload() {
               onChange={handleFileChange}
             />
             <Button onClick={handleUpload}>Carica</Button>
+            <Button onClick={handleClose}>Chiudi</Button>
           </Col>
         </Row>
       </Container>
