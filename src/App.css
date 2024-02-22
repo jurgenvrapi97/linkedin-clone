@@ -140,3 +140,10 @@
   width: 80px;
   height: 80px;
 }
+.img-post {
+  width: 70%;
+  height: 30%;
+}
+.card-text {
+  text-align: center;
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -10,60 +10,96 @@ import {
   Row,
   Spinner,
   Modal,
-} from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import FooterHome from './FooterHome'
-import PostHome from './PostHome'
-import { fetchAllPosts, fetchCreatePost } from '../redux/action'
-import { Link } from 'react-router-dom'
+} from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import FooterHome from "./FooterHome";
+import PostHome from "./PostHome";
+import { fetchAllPosts, fetchCreatePost } from "../redux/action";
+import { Link } from "react-router-dom";
 
 const Home = ({ selector, tokenKey }) => {
   const [inputPost, setInputPost] = useState({
-    text: '',
-  })
+    text: "",
+  });
 
   const handleChange = (event) => {
-    const value = event.target.value
+    const value = event.target.value;
     setInputPost({
       ...inputPost,
       text: value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(fetchCreatePost(tokenKey, inputPost))
-  }
+    e.preventDefault();
+    dispatch(fetchCreatePost(tokenKey, inputPost));
+  };
   // parte sinistra
   // const handleClose = () => setShow(false);
   // const handleShow = () => setShow(true);
-  const [show, setShow] = useState(false)
-  const [showArticle, setShowArticle] = useState(false)
+  const [show, setShow] = useState(false);
+  const [showArticle, setShowArticle] = useState(false);
 
   // parte centrale
-  const handleCloseModale = () => setShowModale(false)
-  const handleShowModale = () => setShowModale(true)
-  const [showModale, setShowModale] = useState(false)
+  const handleCloseModale = () => setShowModale(false);
+  const handleShowModale = () => setShowModale(true);
+  const [showModale, setShowModale] = useState(false);
 
   const toggleShowViewMore = () => {
-    setShow((prevState) => !prevState)
-  }
+    setShow((prevState) => !prevState);
+  };
   const toggleShowViewMoreArticles = () => {
-    setShowArticle((prevState) => !prevState)
-  }
-  const profile = useSelector(selector)
-  const allPosts = useSelector((state) => state.allPosts.allPosts)
-  const dispatch = useDispatch()
-  const tokens = useSelector((state) => state.user.tokens)
+    setShowArticle((prevState) => !prevState);
+  };
+  const profile = useSelector(selector);
+  const allPosts = useSelector((state) => state.allPosts.allPosts);
+  const dispatch = useDispatch();
+  const tokens = useSelector((state) => state.user.tokens);
 
   useEffect(() => {
-    dispatch(fetchAllPosts(tokens.jurgen))
+    dispatch(fetchAllPosts(tokens.jurgen));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch])
+  }, [dispatch]);
+
+  const lastPost = useSelector((state) => state.createPost.createPost);
+  const userName = useSelector((state) => state.user.user);
+
+  const [file, setFile] = useState();
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    setShowModale(false);
+    let formData = new FormData();
+
+    formData.append("post", file);
+
+    try {
+      let response = await fetch(
+        ` https://striveschool-api.herokuapp.com/api/posts/${lastPost._id} `,
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: "Bearer " + tokens[userName.name.toLowerCase()],
+          },
+        }
+      );
+      let data = await response.json();
+      console.log(data);
+      dispatch(
+        fetchAllPosts(tokens[userName.name.toLowerCase()], userName._id)
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
-      <Container style={{ paddingTop: '3em' }} className="pb-5">
+      <Container style={{ paddingTop: "3em" }} className="pb-5">
         <Row className="mt-5">
           {/* sezione card sx */}
           <Col xs={12} md={3}>
@@ -81,8 +117,8 @@ const Home = ({ selector, tokenKey }) => {
                         src={profile.image}
                         alt="image-profile"
                         className=" rounded-circle position-absolute i-h border  border-2 border-white"
-                        width={'60px'}
-                        height={'60px'}
+                        width={"60px"}
+                        height={"60px"}
                       />
                     )}
                   </div>
@@ -93,7 +129,7 @@ const Home = ({ selector, tokenKey }) => {
                         href="#"
                         className="text-black name-underline"
                       >
-                        {profile.name ? profile.name : 'Loggati'}
+                        {profile.name ? profile.name : "Loggati"}
                       </Link>
                     </Card.Title>
                     <Card.Text className="text-center fs-sm">
@@ -172,13 +208,13 @@ const Home = ({ selector, tokenKey }) => {
                   </div>
                 </Col>
               ) : (
-                ''
+                ""
               )}
               <Button
                 className=" text-secondary bg-transparent border-0 mb-2 b-h fw-bold"
                 onClick={toggleShowViewMore}
               >
-                {show ? 'Meno dettagli' : 'Vedi altro'}
+                {show ? "Meno dettagli" : "Vedi altro"}
                 {show ? (
                   <i className="bi bi-caret-up-fill ps-2"></i>
                 ) : (
@@ -213,7 +249,7 @@ const Home = ({ selector, tokenKey }) => {
                           <div
                             className="rounded-5 fw-medium"
                             placeholder="Avvia un post"
-                            style={{ fontSize: '0.8em', padding: '1.1em' }}
+                            style={{ fontSize: "0.8em", padding: "1.1em" }}
                             onClick={handleShowModale}
                             value={inputPost}
                           />
@@ -253,15 +289,21 @@ const Home = ({ selector, tokenKey }) => {
                                   >
                                     Close
                                   </Button>
-                                  <Button
-                                    type="submit"
-                                    variant="primary"
-                                    onClick={handleCloseModale}
-                                  >
+                                  <Button type="submit" variant="primary">
                                     Save Changes
                                   </Button>
                                 </Modal.Footer>
                               </Form>
+                              <div className="d-flex justify-content-around mt-2">
+                                <input
+                                  aria-describedby="inputGroupFileAddon04"
+                                  aria-label="Upload"
+                                  type="file"
+                                  className="form-control w-75"
+                                  onChange={handleFileChange}
+                                />
+                                <button onClick={handleUpload}>carica</button>
+                              </div>
                             </Modal.Body>
                           </Modal>
                         </Col>
@@ -275,7 +317,7 @@ const Home = ({ selector, tokenKey }) => {
                   <i className="bi bi-card-image me-2 text-primary"></i>
                   <p
                     className="m-0 fw-medium text-secondary"
-                    style={{ fontSize: '0.9em' }}
+                    style={{ fontSize: "0.9em" }}
                   >
                     Contenuti multimediali
                   </p>
@@ -285,7 +327,7 @@ const Home = ({ selector, tokenKey }) => {
                   <i className="bi bi-calendar3 me-2 text-warning"></i>
                   <p
                     className="m-0 fw-medium text-secondary"
-                    style={{ fontSize: '0.9em' }}
+                    style={{ fontSize: "0.9em" }}
                   >
                     Evento
                   </p>
@@ -295,7 +337,7 @@ const Home = ({ selector, tokenKey }) => {
                   <i className="bi bi-blockquote-left me-2 text-danger"></i>
                   <p
                     className="m-0 fw-medium text-secondary"
-                    style={{ fontSize: '0.9em' }}
+                    style={{ fontSize: "0.9em" }}
                   >
                     Scrivi un articolo
                   </p>
@@ -312,7 +354,7 @@ const Home = ({ selector, tokenKey }) => {
                       <div key={post._id}>
                         <PostHome post={post} />
                       </div>
-                    )
+                    );
                   })
               ) : (
                 <div className="d-flex justify-content-center">
@@ -325,7 +367,7 @@ const Home = ({ selector, tokenKey }) => {
           <Col xs={12} md={3}>
             <Col>
               <div className="border border-1 rounded-2 bg-white">
-                <div className={showArticle ? 's-art p-3' : 's-art-min p-3'}>
+                <div className={showArticle ? "s-art p-3" : "s-art-min p-3"}>
                   <div className="d-flex justify-content-between ">
                     <h5>LinkedIn Notizie</h5>
                     <i className="bi bi-info-square-fill text-black"></i>
@@ -385,7 +427,7 @@ const Home = ({ selector, tokenKey }) => {
                     className=" text-secondary bg-transparent border-0 mb-2 b-h fw-bold ps-3"
                     onClick={toggleShowViewMoreArticles}
                   >
-                    {showArticle ? 'Meno dettagli' : 'Vedi altro'}
+                    {showArticle ? "Meno dettagli" : "Vedi altro"}
                     {showArticle ? (
                       <i className="bi bi-caret-up-fill ps-2"></i>
                     ) : (
@@ -403,6 +445,6 @@ const Home = ({ selector, tokenKey }) => {
         </Row>
       </Container>
     </>
-  )
-}
-export default Home
+  );
+};
+export default Home;
