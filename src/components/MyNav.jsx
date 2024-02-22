@@ -7,7 +7,12 @@ import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProfile, fetchGeneric, fetchId, logOutAction } from "../redux/action";
+import {
+  fetchProfile,
+  fetchGeneric,
+  fetchId,
+  logOutAction,
+} from "../redux/action";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -20,7 +25,7 @@ const MyNav = ({ setTokenKey }) => {
   const tokens = useSelector((state) => state.user.tokens);
   const username = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +35,7 @@ const MyNav = ({ setTokenKey }) => {
     if (tokenKey) {
       const token = tokens[tokenKey];
       dispatch(fetchProfile(token));
-      setTokenKey(token)
+      setTokenKey(token);
     } else {
       alert("username errato!");
       console.log("token non valido");
@@ -51,17 +56,16 @@ const MyNav = ({ setTokenKey }) => {
     const tokenKey = Object.keys(tokens).find((key) => key === inputValue);
     const token = tokens[tokenKey];
     dispatch(fetchId(token, userId));
-    setInputSearch('')
+    setInputSearch("");
   };
 
   const handleLogout = () => {
     dispatch(logOutAction());
-    setInputValue('')
-    navigate('/')
+    setInputValue("");
+    navigate("/");
     // In questo punto, puoi aggiungere eventuali azioni aggiuntive
     // da eseguire al momento del logout, come reindirizzamento, ecc.
   };
-
 
   useEffect(() => {
     // Nascondi il menu a tendina se entrambi l'input di ricerca e l'array dei risultati di ricerca sono vuoti
@@ -71,10 +75,14 @@ const MyNav = ({ setTokenKey }) => {
   }, [inputSearch, search, inputValue]);
 
   return (
-    <Navbar bg="light" data-bs-theme="light" className="p-0 position-fixed top-0 end-0 start-0 z-3 border border-bottom ">
+    <Navbar
+      bg="light"
+      data-bs-theme="light"
+      className="p-0 position-fixed top-0 end-0 start-0 z-3 border border-bottom "
+    >
       <Container className="justify-content-around">
         <Nav className="p-0">
-          <Link to='/' className="me-2 nav-link" href="#home">
+          <Link to="/" className="me-2 nav-link" href="#home">
             <img src="./logo.svg" alt="logo" style={{ height: "2em" }} />
           </Link>
           <Nav.Link className="d-flex d-lg-none flex-column align-items-center me-0 me-lg-4">
@@ -173,20 +181,25 @@ const MyNav = ({ setTokenKey }) => {
             </div>
           </Nav.Link>
 
-          <Nav.Link className="d-flex flex-column align-items-center me-0 me-lg-4">
-            <div>
-              <i
-                className="bi bi-briefcase-fill"
-                style={{ fontSize: "1.3em" }}
-              ></i>
-            </div>
-            <div
-              className="fw-light d-none d-lg-flex"
-              style={{ fontSize: "0.8em" }}
+          <Nav>
+            <Link
+              to={"/jobs"}
+              className="d-flex flex-column align-items-center me-0 me-lg-4 text-decoration-none "
             >
-              Lavoro
-            </div>
-          </Nav.Link>
+              <div className="text-secondary">
+                <i
+                  className="bi bi-briefcase-fill"
+                  style={{ fontSize: "1.3em" }}
+                ></i>
+              </div>
+              <div
+                className="fw-light d-none d-lg-flex text-secondary "
+                style={{ fontSize: "0.8em" }}
+              >
+                Lavoro
+              </div>
+            </Link>
+          </Nav>
 
           <Nav.Link className="d-flex flex-column align-items-center me-0 me-lg-4">
             <div>
@@ -237,7 +250,7 @@ const MyNav = ({ setTokenKey }) => {
                     src={username.image}
                     alt="username logo"
                     height={"28px"}
-                    width={'28px'}
+                    width={"28px"}
                     className="rounded-circle"
                   />
                 }
@@ -250,7 +263,7 @@ const MyNav = ({ setTokenKey }) => {
                         src={username.image}
                         alt={username.id}
                         height={"50px"}
-                        width={'50px'}
+                        width={"50px"}
                         className="me-2 rounded-circle "
                       />
                       <div className="d-flex flex-column ">
@@ -311,7 +324,7 @@ const MyNav = ({ setTokenKey }) => {
                   href="#action/3.5"
                   className="fw-lighter dropdown-item"
                   style={{ fontSize: "0.9em" }}
-                  onClick={handleLogout} 
+                  onClick={handleLogout}
                 >
                   Esci
                 </Button>

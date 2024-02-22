@@ -5,7 +5,9 @@ export const FETCH_USER_ID = "FETCH_USER_ID";
 export const FETCH_EXPERIENCES = "FETCH_EXPERIENCES";
 export const CREATE_EXPERIENCES = "CREATE_EXPERIENCES";
 export const FETCH_POSTS = "FETCH_POSTS";
+export const FETCH_JOBS = "FETCH_JOBS";
 export const CREATE_POST = "CREATE_POST";
+export const FETCH_SEARCH_JOBS = "FETCH_SEARCH_JOBS";
 
 export const fetchProfile = (token) => {
   return async (dispatch) => {
@@ -252,5 +254,35 @@ export const fetchPostAction = (token, postId, method, exp = null) => {
     const data = await response.json();
 
     dispatch({ type: method, payload: data });
+  };
+};
+
+export const fetchAllJobs = () => {
+  return async (dispatch) => {
+    const response = await fetch(
+      "https://strive-benchmark.herokuapp.com/api/jobs"
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    dispatch({ type: FETCH_JOBS, payload: data });
+  };
+};
+
+export const fetchSearchAllJobs = (value) => {
+  return async (dispatch) => {
+    const response = await fetch(
+      "https://strive-benchmark.herokuapp.com/api/jobs?search=" + value
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    dispatch({ type: FETCH_SEARCH_JOBS, payload: data });
   };
 };

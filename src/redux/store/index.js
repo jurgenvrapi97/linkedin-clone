@@ -8,6 +8,8 @@ import createreducer from "../reducers/createExperiences";
 import allPosts from "../reducers/allPosts";
 import createPostReducer from "../reducers/createPost";
 import modificaPost from "../reducers/modificaPost";
+import allJobs from "../reducers/allJobs";
+import allSearchJobs from "../reducers/allSearchJobs";
 
 const mainReducer = combineReducers({
   user: userReducer,
@@ -19,6 +21,8 @@ const mainReducer = combineReducers({
   allPosts: allPosts,
   createPost: createPostReducer,
   modificaPost: modificaPost,
+  allJobs: allJobs,
+  allSearchJobs: allSearchJobs,
 });
 
 const store = configureStore({

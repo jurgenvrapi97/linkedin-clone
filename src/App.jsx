@@ -14,17 +14,18 @@ import Experiences from "./components/Experiences";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import { useState } from "react";
+import Jobs from "./components/Jobs";
 
 function App() {
   const userSelector = (state) => state.user.user;
   const idSelector = (state) => state.idUser.user;
-  const [tokenKey, setTokenKey]= useState('')
-  console.log('il token è:', tokenKey)
+  const [tokenKey, setTokenKey] = useState("");
+  console.log("il token è:", tokenKey);
 
   return (
     <BrowserRouter>
       <div className="bg-background">
-        <MyNav setTokenKey={setTokenKey}/>
+        <MyNav setTokenKey={setTokenKey} />
 
         <Container>
           <Routes>
@@ -33,15 +34,17 @@ function App() {
               element={
                 <>
                   <Row className="mt-5">
-                    <Col md={8} lg={8} className='mt-5'>
+                    <Col md={8} lg={8} className="mt-5">
                       <Mainprofile selector={userSelector} />
-                      <Experiences tokenKey={tokenKey} selector={userSelector}/>
+                      <Experiences
+                        tokenKey={tokenKey}
+                        selector={userSelector}
+                      />
                     </Col>
-                    <Col className='mt-5'>
+                    <Col className="mt-5">
                       <MyAside />
                     </Col>
                   </Row>
-                  <MSGbar />
                   <Footer />
                 </>
               }
@@ -51,21 +54,22 @@ function App() {
               element={
                 <>
                   <Row>
-                    <Col md={8} lg={8} style={{marginTop: '6em'}}>
+                    <Col md={8} lg={8} style={{ marginTop: "6em" }}>
                       <Mainprofile selector={idSelector} />
-                      <Experiences tokenKey={tokenKey} selector={idSelector}/>
+                      <Experiences tokenKey={tokenKey} selector={idSelector} />
                     </Col>
-                    <Col style={{marginTop: '6em'}}>
+                    <Col style={{ marginTop: "6em" }}>
                       <MyAside />
                     </Col>
                   </Row>
-                  <MSGbar />
                   <Footer />
                 </>
               }
             />
             <Route path="/" element={<Home selector={userSelector} />} />
+            <Route path="/jobs" element={<Jobs />} />
           </Routes>
+          <MSGbar />
         </Container>
       </div>
     </BrowserRouter>
