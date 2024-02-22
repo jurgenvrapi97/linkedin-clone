@@ -209,11 +209,11 @@ export const fetchCreatePost = (token, post) => {
       "https://striveschool-api.herokuapp.com/api/posts/",
       {
         method: "POST",
+        body: body,
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: body,
       }
     );
 
