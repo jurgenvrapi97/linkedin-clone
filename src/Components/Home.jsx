@@ -9,14 +9,35 @@ import {
   ListGroup,
   Row,
   Spinner,
+  Modal,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FooterHome from "./FooterHome";
 import PostHome from "./PostHome";
-import { fetchAllPosts } from "../redux/action";
+import { fetchAllPosts, fetchCreatePost } from "../redux/action";
 import { Link } from "react-router-dom";
 
-const Home = ({ selector }) => {
+const Home = ({ selector, tokenKey }) => {
+  const [inputPost, setInputPost] = useState({
+    text: "",
+  });
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setInputPost({
+      ...inputPost,
+      text: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("input", inputPost);
+    dispatch(fetchCreatePost(tokenKey, inputPost));
+  };
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
   const [showArticle, setShowArticle] = useState(false);
 
@@ -38,7 +59,7 @@ const Home = ({ selector }) => {
 
   return (
     <>
-      <Container style={{paddingTop: '3em'}}>
+      <Container style={{ paddingTop: "3em" }}>
         <Row className="mt-5">
           {/* sezione card sx */}
           <Col xs={12} md={3}>
@@ -53,18 +74,21 @@ const Home = ({ selector }) => {
                     />
                     {profile && (
                       <img
-                      src={profile.image}
-                      alt="image-profile"
-                      className=" rounded-circle position-absolute i-h border  border-2 border-white"
-                      width={'60px'}
-                      height={'60px'}
-                    />
+                        src={profile.image}
+                        alt="image-profile"
+                        className=" rounded-circle position-absolute i-h border  border-2 border-white"
+                        width={"60px"}
+                        height={"60px"}
+                      />
                     )}
-
                   </div>
                   <Card.Body className="p-0 mt-2 ">
                     <Card.Title className="text-center pt-4">
-                      <Link to='/profile' href="#" className="text-black name-underline">
+                      <Link
+                        to="/profile"
+                        href="#"
+                        className="text-black name-underline"
+                      >
                         {profile.name ? profile.name : "Loggati"}
                       </Link>
                     </Card.Title>
@@ -166,9 +190,9 @@ const Home = ({ selector }) => {
               <CardBody className="p-0">
                 <ListGroup>
                   <ListGroup.Item className="border border-0 d-flex align-items-center mt-1">
-                    <div >
+                    <div>
                       {profile && (
-                          <img
+                        <img
                           src={profile.image}
                           width="50px"
                           height="50px"
@@ -177,19 +201,65 @@ const Home = ({ selector }) => {
                       )}
                     </div>
 
-                    <div className="w-100">
-                      <Form>
-                        <Row>
-                          <Col>
-                            <Form.Control
-                              className="rounded-5 fw-medium"
-                              placeholder="Avvia un post"
-                              style={{fontSize: '0.8em', padding: '1.1em'}}
-                            />
-                          </Col>
-                        </Row>
-                      </Form>
-                    </div>
+                    <Button
+                      onSubmit={handleSubmit}
+                      className="bg-transparent w-100 text text-dark"
+                    >
+                      <Row>
+                        <Col>
+                          <div
+                            className="rounded-5 fw-medium"
+                            placeholder="Avvia un post"
+                            style={{ fontSize: "0.8em", padding: "1.1em" }}
+                            onClick={handleShow}
+                            value={inputPost}
+                          />
+
+                          <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                              <Modal.Title>
+                                <img
+                                  src={profile.image}
+                                  alt="logo"
+                                  className="rounded-circle me-3"
+                                  height="30px"
+                                  width="30px"
+                                />
+                                {profile.name}
+                              </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                              <Form onSubmit={handleSubmit}>
+                                <Form.Group
+                                  className="mb-3"
+                                  controlId="exampleForm.ControlTextarea1"
+                                >
+                                  <Form.Control
+                                    as="textarea"
+                                    rows={6}
+                                    className="border border-0"
+                                    placeholder="Di cosa vorresti parlare?"
+                                    value={inputPost.text}
+                                    onChange={handleChange}
+                                  />
+                                </Form.Group>
+                                <Modal.Footer>
+                                  <Button
+                                    variant="secondary"
+                                    onClick={handleClose}
+                                  >
+                                    Close
+                                  </Button>
+                                  <Button type="submit" variant="primary">
+                                    Save Changes
+                                  </Button>
+                                </Modal.Footer>
+                              </Form>
+                            </Modal.Body>
+                          </Modal>
+                        </Col>
+                      </Row>
+                    </Button>
                   </ListGroup.Item>
                 </ListGroup>
               </CardBody>
@@ -206,7 +276,12 @@ const Home = ({ selector }) => {
                     <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                     <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z" />
                   </svg>
-                  <p className="m-0 fw-medium text-secondary" style={{fontSize: '0.9em'}}>Contenuti multimediali</p>
+                  <p
+                    className="m-0 fw-medium text-secondary"
+                    style={{ fontSize: "0.9em" }}
+                  >
+                    Contenuti multimediali
+                  </p>
                 </div>
 
                 <div className="d-flex align-items-center ">
@@ -221,7 +296,12 @@ const Home = ({ selector }) => {
                     <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z" />
                     <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
                   </svg>
-                  <p className="m-0 fw-medium text-secondary" style={{fontSize: '0.9em'}}>Evento</p>
+                  <p
+                    className="m-0 fw-medium text-secondary"
+                    style={{ fontSize: "0.9em" }}
+                  >
+                    Evento
+                  </p>
                 </div>
 
                 <div className="d-flex align-items-center ">
@@ -235,25 +315,30 @@ const Home = ({ selector }) => {
                   >
                     <path d="M2.5 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1zm5 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-5 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1zm.79-5.373q.168-.117.444-.275L3.524 6q-.183.111-.452.287-.27.176-.51.428a2.4 2.4 0 0 0-.398.562Q2 7.587 2 7.969q0 .54.217.873.217.328.72.328.322 0 .504-.211a.7.7 0 0 0 .188-.463q0-.345-.211-.521-.205-.182-.568-.182h-.282q.036-.305.123-.498a1.4 1.4 0 0 1 .252-.37 2 2 0 0 1 .346-.298zm2.167 0q.17-.117.445-.275L5.692 6q-.183.111-.452.287-.27.176-.51.428a2.4 2.4 0 0 0-.398.562q-.165.31-.164.692 0 .54.217.873.217.328.72.328.322 0 .504-.211a.7.7 0 0 0 .188-.463q0-.345-.211-.521-.205-.182-.568-.182h-.282a1.8 1.8 0 0 1 .118-.492q.087-.194.257-.375a2 2 0 0 1 .346-.3z" />
                   </svg>
-                  <p className="m-0 fw-medium text-secondary" style={{fontSize: '0.9em'}}>Scrivi un articolo</p>
+                  <p
+                    className="m-0 fw-medium text-secondary"
+                    style={{ fontSize: "0.9em" }}
+                  >
+                    Scrivi un articolo
+                  </p>
                 </div>
               </div>
             </Card>
 
             <Col className="d-flex flex-column " md={12} lg={12}>
-                  {allPosts.length > 0 ? (
-                    allPosts.slice(15, 45).map((post) => {
-                      return (
-                        <div key={post._id}>
-                          <PostHome  post={post} />
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <>
-                      <Spinner animation="border" />;
-                    </>
-                  )}
+              {allPosts.length > 0 ? (
+                allPosts.slice(15, 45).map((post) => {
+                  return (
+                    <div key={post._id}>
+                      <PostHome post={post} />
+                    </div>
+                  );
+                })
+              ) : (
+                <>
+                  <Spinner animation="border" />;
+                </>
+              )}
             </Col>
           </Col>
           {/* sezione card dx */}

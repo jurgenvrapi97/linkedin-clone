@@ -18,13 +18,13 @@ import { useState } from "react";
 function App() {
   const userSelector = (state) => state.user.user;
   const idSelector = (state) => state.idUser.user;
-  const [tokenKey, setTokenKey]= useState('')
-  console.log('il token è:', tokenKey)
+  const [tokenKey, setTokenKey] = useState("");
+  console.log("il token è:", tokenKey);
 
   return (
     <BrowserRouter>
       <div className="bg-background">
-        <MyNav setTokenKey={setTokenKey}/>
+        <MyNav setTokenKey={setTokenKey} />
 
         <Container>
           <Routes>
@@ -33,11 +33,14 @@ function App() {
               element={
                 <>
                   <Row className="mt-5">
-                    <Col md={8} lg={8} className='mt-5'>
+                    <Col md={8} lg={8} className="mt-5">
                       <Mainprofile selector={userSelector} />
-                      <Experiences tokenKey={tokenKey} selector={userSelector}/>
+                      <Experiences
+                        tokenKey={tokenKey}
+                        selector={userSelector}
+                      />
                     </Col>
-                    <Col className='mt-5'>
+                    <Col className="mt-5">
                       <MyAside />
                     </Col>
                   </Row>
@@ -51,11 +54,11 @@ function App() {
               element={
                 <>
                   <Row>
-                    <Col md={8} lg={8} style={{marginTop: '6em'}}>
+                    <Col md={8} lg={8} style={{ marginTop: "6em" }}>
                       <Mainprofile selector={idSelector} />
-                      <Experiences tokenKey={tokenKey} selector={idSelector}/>
+                      <Experiences tokenKey={tokenKey} selector={idSelector} />
                     </Col>
-                    <Col style={{marginTop: '6em'}}>
+                    <Col style={{ marginTop: "6em" }}>
                       <MyAside />
                     </Col>
                   </Row>
@@ -64,7 +67,10 @@ function App() {
                 </>
               }
             />
-            <Route path="/" element={<Home selector={userSelector} />} />
+            <Route
+              path="/"
+              element={<Home selector={userSelector} tokenKey={tokenKey} />}
+            />
           </Routes>
         </Container>
       </div>
