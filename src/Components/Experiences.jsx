@@ -46,7 +46,7 @@ const Experiences = ({ tokenKey, selector }) => {
   return (
     <>
       <Card className="d-none d-md-flex" md={12} lg={12}>
-        <Card.Title className="p-3 d-flex justify-content-between align-items-center">
+        <Card.Title className="p-3 d-flex justify-content-between align-items-center mb-0">
           Esperienze {user._id === profile._id && <AddExp />}
         </Card.Title>
         {experiences && experiences.length ? (
@@ -58,7 +58,11 @@ const Experiences = ({ tokenKey, selector }) => {
                     <div className="d-flex flex-column ">
                       <div className="d-flex">
                         <div>
-                          <img src={exp.image} alt="experience-logo" />
+                          <img
+                            src={exp.image}
+                            alt="experience-logo"
+                            className="rounded-circle img-exp "
+                          />
                         </div>
 
                         <div className=" ms-3 ">
@@ -93,7 +97,7 @@ const Experiences = ({ tokenKey, selector }) => {
             </div>
           ))
         ) : (
-          <p>Nessuna esperienza trovata per questo profilo.</p>
+          <p className="p-3">Nessuna esperienza trovata per questo profilo.</p>
         )}
       </Card>
     </>

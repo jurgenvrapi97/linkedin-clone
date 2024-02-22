@@ -135,3 +135,7 @@
 #profile {
   object-fit: cover;
 }
+.img-exp {
+  width: 150px;
+  height: 100%;
+}

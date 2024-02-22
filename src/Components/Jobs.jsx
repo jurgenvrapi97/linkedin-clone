@@ -66,9 +66,9 @@ const Jobs = () => {
               );
             })
           ) : (
-            <>
-              <Spinner animation="border" />;
-            </>
+            <div className="d-flex justify-content-center text-primary">
+              <Spinner animation="border" />
+            </div>
           )}
         </Col>
       </Row>
