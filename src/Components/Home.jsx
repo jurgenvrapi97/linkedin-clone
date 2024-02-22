@@ -188,7 +188,6 @@ const Home = ({ selector, tokenKey }) => {
             </Row>
           </Col>
           {/* sezione post centrale*/}
-
           <Col xs={12} md={6}>
             <Card className="d-flex mb-4" md={12} lg={12}>
               <CardBody className="p-0">
@@ -273,17 +272,7 @@ const Home = ({ selector, tokenKey }) => {
               </CardBody>
               <div className="d-flex justify-content-between px-3 pb-3 pt-1">
                 <div className="d-flex align-items-center ">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-card-image me-2 text-primary"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                    <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z" />
-                  </svg>
+                  <i className="bi bi-card-image me-2 text-primary"></i>
                   <p
                     className="m-0 fw-medium text-secondary"
                     style={{ fontSize: "0.9em" }}
@@ -293,17 +282,7 @@ const Home = ({ selector, tokenKey }) => {
                 </div>
 
                 <div className="d-flex align-items-center ">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-calendar3 me-2 text-warning"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z" />
-                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
-                  </svg>
+                  <i className="bi bi-calendar3 me-2 text-warning"></i>
                   <p
                     className="m-0 fw-medium text-secondary"
                     style={{ fontSize: "0.9em" }}
@@ -313,16 +292,7 @@ const Home = ({ selector, tokenKey }) => {
                 </div>
 
                 <div className="d-flex align-items-center ">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-blockquote-left me-2 text-danger"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M2.5 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1zm5 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-5 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1zm.79-5.373q.168-.117.444-.275L3.524 6q-.183.111-.452.287-.27.176-.51.428a2.4 2.4 0 0 0-.398.562Q2 7.587 2 7.969q0 .54.217.873.217.328.72.328.322 0 .504-.211a.7.7 0 0 0 .188-.463q0-.345-.211-.521-.205-.182-.568-.182h-.282q.036-.305.123-.498a1.4 1.4 0 0 1 .252-.37 2 2 0 0 1 .346-.298zm2.167 0q.17-.117.445-.275L5.692 6q-.183.111-.452.287-.27.176-.51.428a2.4 2.4 0 0 0-.398.562q-.165.31-.164.692 0 .54.217.873.217.328.72.328.322 0 .504-.211a.7.7 0 0 0 .188-.463q0-.345-.211-.521-.205-.182-.568-.182h-.282a1.8 1.8 0 0 1 .118-.492q.087-.194.257-.375a2 2 0 0 1 .346-.3z" />
-                  </svg>
+                  <i className="bi bi-blockquote-left me-2 text-danger"></i>
                   <p
                     className="m-0 fw-medium text-secondary"
                     style={{ fontSize: "0.9em" }}
@@ -343,9 +313,9 @@ const Home = ({ selector, tokenKey }) => {
                   );
                 })
               ) : (
-                <>
-                  <Spinner animation="border" />;
-                </>
+                <div className="d-flex justify-content-center">
+                  <Spinner animation="border" variant="primary" />
+                </div>
               )}
             </Col>
           </Col>
