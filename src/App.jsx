@@ -66,7 +66,10 @@ function App() {
                 </>
               }
             />
-            <Route path="/" element={<Home selector={userSelector} />} />
+            <Route
+              path="/"
+              element={<Home selector={userSelector} tokenKey={tokenKey} />}
+            />
             <Route path="/jobs" element={<Jobs />} />
           </Routes>
           <MSGbar />

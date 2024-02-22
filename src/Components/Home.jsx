@@ -9,16 +9,41 @@ import {
   ListGroup,
   Row,
   Spinner,
+  Modal,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FooterHome from "./FooterHome";
 import PostHome from "./PostHome";
-import { fetchAllPosts } from "../redux/action";
+import { fetchAllPosts, fetchCreatePost } from "../redux/action";
 import { Link } from "react-router-dom";
 
-const Home = ({ selector }) => {
+const Home = ({ selector, tokenKey }) => {
+  const [inputPost, setInputPost] = useState({
+    text: "",
+  });
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setInputPost({
+      ...inputPost,
+      text: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(fetchCreatePost(tokenKey, inputPost));
+  };
+  // parte sinistra
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
   const [showArticle, setShowArticle] = useState(false);
+
+  // parte centrale
+  const handleCloseModale = () => setShowModale(false);
+  const handleShowModale = () => setShowModale(true);
+  const [showModale, setShowModale] = useState(false);
 
   const toggleShowViewMore = () => {
     setShow((prevState) => !prevState);
@@ -38,7 +63,11 @@ const Home = ({ selector }) => {
 
   return (
     <>
+<<<<<<< HEAD
       <Container style={{ paddingTop: "3em" }} className="pb-5">
+=======
+      <Container style={{ paddingTop: "3em" }}>
+>>>>>>> main
         <Row className="mt-5">
           {/* sezione card sx */}
           <Col xs={12} md={3}>
@@ -180,6 +209,7 @@ const Home = ({ selector }) => {
                       )}
                     </div>
 
+<<<<<<< HEAD
                     <div className="w-100">
                       <Form>
                         <Row>
@@ -193,6 +223,71 @@ const Home = ({ selector }) => {
                         </Row>
                       </Form>
                     </div>
+=======
+                    <Button
+                      onSubmit={handleSubmit}
+                      className="bg-transparent w-100 text text-dark"
+                    >
+                      <Row>
+                        <Col>
+                          <div
+                            className="rounded-5 fw-medium"
+                            placeholder="Avvia un post"
+                            style={{ fontSize: "0.8em", padding: "1.1em" }}
+                            onClick={handleShowModale}
+                            value={inputPost}
+                          />
+
+                          <Modal show={showModale} onHide={handleCloseModale}>
+                            <Modal.Header closeButton>
+                              <Modal.Title>
+                                <img
+                                  src={profile.image}
+                                  alt="logo"
+                                  className="rounded-circle me-3"
+                                  height="30px"
+                                  width="30px"
+                                />
+                                {profile.name}
+                              </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                              <Form onSubmit={handleSubmit}>
+                                <Form.Group
+                                  className="mb-3"
+                                  controlId="exampleForm.ControlTextarea1"
+                                >
+                                  <Form.Control
+                                    as="textarea"
+                                    rows={6}
+                                    className="border border-0"
+                                    placeholder="Di cosa vorresti parlare?"
+                                    value={inputPost.text}
+                                    onChange={handleChange}
+                                  />
+                                </Form.Group>
+                                <Modal.Footer>
+                                  <Button
+                                    variant="secondary"
+                                    onClick={handleCloseModale}
+                                  >
+                                    Close
+                                  </Button>
+                                  <Button
+                                    type="submit"
+                                    variant="primary"
+                                    onClick={handleCloseModale}
+                                  >
+                                    Save Changes
+                                  </Button>
+                                </Modal.Footer>
+                              </Form>
+                            </Modal.Body>
+                          </Modal>
+                        </Col>
+                      </Row>
+                    </Button>
+>>>>>>> main
                   </ListGroup.Item>
                 </ListGroup>
               </CardBody>

@@ -174,10 +174,16 @@ export const fetchExperiencesAction = (
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
+    if (method !== "DELETE") {
+      const data = await response.json();
 
-    const data = await response.json();
-
-    dispatch({ type: method, payload: data });
+      dispatch({ type: method, payload: data });
+    } else {
+      dispatch({ type: method });
+    }
+    if (method === "PUT" || method === "DELETE") {
+      fetchExperiences(token, id);
+    }
   };
 };
 
@@ -211,11 +217,11 @@ export const fetchCreatePost = (token, post) => {
       "https://striveschool-api.herokuapp.com/api/posts/",
       {
         method: "POST",
+        body: body,
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: body,
       }
     );
 
