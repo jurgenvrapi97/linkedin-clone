@@ -1,60 +1,55 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchExperiencesCreate } from "../redux/action";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { Col, Container, Row } from "react-bootstrap";
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchExperiencesCreate } from '../redux/action'
+import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
+import { Col, Container, Row } from 'react-bootstrap'
+import { fetchExperiences } from '../redux/action'
 
 const AddExp = () => {
   //state modale
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const username = useSelector((state) => {
-    return state.user.user;
-  });
+    return state.user.user
+  })
   const tokens = useSelector((state) => {
-    return state.user.tokens;
-  });
-
+    return state.user.tokens
+  })
   const [form, setForm] = useState({
-    role: "",
-    company: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-    area: "",
-    image: "",
-  });
+    role: '',
+    company: '',
+    startDate: '',
+    endDate: '',
+    description: '',
+    area: '',
+  })
 
   const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const name = event.target.name
+    const value = event.target.value
     setForm({
       ...form,
       [name]: value,
-    });
-  };
+    })
+  }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(username.name);
-    setShow(false);
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setShow(false)
+    await dispatch(fetchExperiencesCreate(tokens.jurgen, username._id, form))
     dispatch(
-      fetchExperiencesCreate(
-        tokens[username.name.toLowerCase()],
-        username._id,
-        form
-      )
-    );
-  };
+      fetchExperiences(tokens[username.name.toLowerCase()], username._id)
+    )
+  }
 
   return (
     <>
-      <Button variant="outline-secondary" className="border border-0 rounded-circle" onClick={handleShow}>
-      <i className="bi bi-plus-lg fs-5"></i>
+      <Button variant="primary" onClick={handleShow}>
+        <i className="bi bi-plus-circle-fill"></i>
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
@@ -74,7 +69,6 @@ const AddExp = () => {
                   onChange={handleChange}
                 />
               </Col>
-
               <Col className="d-flex flex-column">
                 <label htmlFor="company">Compagnia</label>
                 <input
@@ -124,7 +118,7 @@ const AddExp = () => {
                 />
               </Col>
               <Col className="d-flex col-12 flex-column">
-                {" "}
+                {' '}
                 <label htmlFor="description">Descrizione</label>
                 <textarea
                   id="description"
@@ -143,7 +137,7 @@ const AddExp = () => {
         </Container>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default AddExp;
+export default AddExp
