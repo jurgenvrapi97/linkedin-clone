@@ -27,7 +27,6 @@ const Home = ({ selector }) => {
     setShowArticle((prevState) => !prevState);
   };
   const profile = useSelector(selector);
-
   const allPosts = useSelector((state) => state.allPosts.allPosts);
   const dispatch = useDispatch();
   const tokens = useSelector((state) => state.user.tokens);
@@ -52,12 +51,16 @@ const Home = ({ selector }) => {
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKGnfp87Tbfb5StD2ErWUl7-sHnfPLJKdCxQ&usqp=CAU"
                       className="c-i"
                     />
-
-                    <img
-                      src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
-                      alt=""
-                      className=" rounded-5 position-absolute i-h border  border-2 border-white"
+                    {profile && (
+                      <img
+                      src={profile.image}
+                      alt="image-profile"
+                      className=" rounded-circle position-absolute i-h border  border-2 border-white"
+                      width={'60px'}
+                      height={'60px'}
                     />
+                    )}
+
                   </div>
                   <Card.Body className="p-0 mt-2 ">
                     <Card.Title className="text-center pt-4">
@@ -159,25 +162,29 @@ const Home = ({ selector }) => {
           {/* sezione post centrale*/}
 
           <Col xs={12} md={6}>
-            <Card className="d-none d-md-flex" md={12} lg={12}>
-              <CardBody>
+            <Card className="d-flex mb-4" md={12} lg={12}>
+              <CardBody className="p-0">
                 <ListGroup>
-                  <ListGroup.Item className="border border-0 d-flex">
-                    <div>
-                      <img
-                        src="https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1716422400&v=beta&t=5MUJe7JW7qN_AhLIvXWy09nSa-yX3GS-ThImsm3_xqE"
-                        width="50px"
-                        height="50px"
-                      ></img>
+                  <ListGroup.Item className="border border-0 d-flex align-items-center mt-1">
+                    <div >
+                      {profile && (
+                          <img
+                          src={profile.image}
+                          width="50px"
+                          height="50px"
+                          className="rounded-circle me-2"
+                        ></img>
+                      )}
                     </div>
 
-                    <div className="  w-100 ">
-                      <Form className="pt-2">
+                    <div className="w-100">
+                      <Form>
                         <Row>
                           <Col>
                             <Form.Control
-                              className="rounded-5 "
+                              className="rounded-5 fw-medium"
                               placeholder="Avvia un post"
+                              style={{fontSize: '0.8em', padding: '1.1em'}}
                             />
                           </Col>
                         </Row>
@@ -186,66 +193,59 @@ const Home = ({ selector }) => {
                   </ListGroup.Item>
                 </ListGroup>
               </CardBody>
-              <div className="d-flex justify-content-around pb-2">
-                <div>
+              <div className="d-flex justify-content-between px-3 pb-3 pt-1">
+                <div className="d-flex align-items-center ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
                     fill="currentColor"
-                    className="bi bi-card-image"
+                    className="bi bi-card-image me-2 text-primary"
                     viewBox="0 0 16 16"
                   >
                     <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                     <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z" />
                   </svg>
-                  <p>Contenuti multimediali</p>
+                  <p className="m-0 fw-medium text-secondary" style={{fontSize: '0.9em'}}>Contenuti multimediali</p>
                 </div>
 
-                <div>
+                <div className="d-flex align-items-center ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
                     fill="currentColor"
-                    className="bi bi-calendar3"
+                    className="bi bi-calendar3 me-2 text-warning"
                     viewBox="0 0 16 16"
                   >
                     <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z" />
                     <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
                   </svg>
-                  <p>Evento</p>
+                  <p className="m-0 fw-medium text-secondary" style={{fontSize: '0.9em'}}>Evento</p>
                 </div>
 
-                <div>
+                <div className="d-flex align-items-center ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
                     fill="currentColor"
-                    className="bi bi-blockquote-left"
+                    className="bi bi-blockquote-left me-2 text-danger"
                     viewBox="0 0 16 16"
                   >
                     <path d="M2.5 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1zm5 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-5 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1zm.79-5.373q.168-.117.444-.275L3.524 6q-.183.111-.452.287-.27.176-.51.428a2.4 2.4 0 0 0-.398.562Q2 7.587 2 7.969q0 .54.217.873.217.328.72.328.322 0 .504-.211a.7.7 0 0 0 .188-.463q0-.345-.211-.521-.205-.182-.568-.182h-.282q.036-.305.123-.498a1.4 1.4 0 0 1 .252-.37 2 2 0 0 1 .346-.298zm2.167 0q.17-.117.445-.275L5.692 6q-.183.111-.452.287-.27.176-.51.428a2.4 2.4 0 0 0-.398.562q-.165.31-.164.692 0 .54.217.873.217.328.72.328.322 0 .504-.211a.7.7 0 0 0 .188-.463q0-.345-.211-.521-.205-.182-.568-.182h-.282a1.8 1.8 0 0 1 .118-.492q.087-.194.257-.375a2 2 0 0 1 .346-.3z" />
                   </svg>
-                  <p>Scrivi un articolo</p>
+                  <p className="m-0 fw-medium text-secondary" style={{fontSize: '0.9em'}}>Scrivi un articolo</p>
                 </div>
               </div>
             </Card>
 
-            <Card className="d-none d-md-flex" md={12} lg={12}>
-              <Card.Title className="p-3 ">Consigli per te</Card.Title>
-
-              <CardBody className="p-1">
-                <ListGroup>
+            <Col className="d-flex flex-column " md={12} lg={12}>
                   {allPosts.length > 0 ? (
                     allPosts.slice(15, 45).map((post) => {
                       return (
                         <div key={post._id}>
                           <PostHome  post={post} />
-                          <div className="px-5">
-                            <hr />
-                          </div>
                         </div>
                       );
                     })
@@ -254,12 +254,10 @@ const Home = ({ selector }) => {
                       <Spinner animation="border" />;
                     </>
                   )}
-                </ListGroup>
-              </CardBody>
-            </Card>
+            </Col>
           </Col>
           {/* sezione card dx */}
-          <Col xs={3}>
+          <Col xs={12} md={3}>
             <Col>
               <div className="border border-1 rounded-2 bg-white">
                 <div className={showArticle ? "s-art p-3" : "s-art-min p-3"}>
@@ -275,7 +273,7 @@ const Home = ({ selector }) => {
                         <p className="p-li">Notizie principali</p>
                       </li>
                       <li className="fw-bold">
-                        Come si costruisce un leadreship
+                        Come si costruisce un leadership
                         <p className="p-li">4 giorni fa</p>
                       </li>
                       <li className="fw-bold">

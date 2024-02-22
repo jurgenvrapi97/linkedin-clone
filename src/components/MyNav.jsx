@@ -71,7 +71,7 @@ const MyNav = ({ setTokenKey }) => {
   }, [inputSearch, search, inputValue]);
 
   return (
-    <Navbar bg="light" data-bs-theme="light" className="p-0 position-fixed top-0 end-0 start-0 z-3">
+    <Navbar bg="light" data-bs-theme="light" className="p-0 position-fixed top-0 end-0 start-0 z-3 border border-bottom ">
       <Container className="justify-content-around">
         <Nav className="p-0">
           <Link to='/' className="me-2 nav-link" href="#home">
