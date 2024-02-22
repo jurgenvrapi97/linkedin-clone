@@ -9,10 +9,16 @@ const PostHome = ({ post }) => {
         <div className="d-flex justify-content-between">
           <Card.Title>{post.username}</Card.Title>
           <div>
-            <Button className="h rounded-5 p-2 bg-transparent border-0">
+            <Button
+              className="h rounded-5 p-2 bg-transparent border-0"
+              variant="outline-dark"
+            >
               <i className="bi bi-pencil "></i>
             </Button>
-            <Button className="h rounded-5 p-2 bg-transparent border-0">
+            <Button
+              className="h rounded-5 p-2 bg-transparent border-0"
+              variant="outline-danger"
+            >
               <i className="bi bi-trash3 fs-5 "></i>
             </Button>
           </div>
