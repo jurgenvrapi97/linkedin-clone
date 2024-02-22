@@ -92,6 +92,26 @@ const PostHome = ({ post }) => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      let response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/posts/${post._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: "Bearer " + tokens[username.name.toLowerCase()],
+          },
+        }
+      );
+      if (response.ok) {
+        console.log("Post deleted successfully");
+      } else {
+        console.error("Failed to delete post");
+      }
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
   return (
     <>
       <Card className="mb-2">
@@ -155,7 +175,10 @@ const PostHome = ({ post }) => {
                   </div>
                 </Modal.Body>
               </Modal>
-              <Button className="bg-transparent border-0">
+              <Button
+                className="bg-transparent border-0"
+                onClick={() => handleDelete(post._id)}
+              >
                 <i className="bi bi-trash text-danger "></i>
               </Button>
             </div>
