@@ -12,7 +12,7 @@
 }
 .a:hover {
   text-decoration: underline;
-  color: rgb(63, 124, 255);
+  color: rgb(0, 102, 153);
 }
 
 .b {
@@ -88,11 +88,11 @@
 }
 .c-blue {
   text-decoration: none;
-  color: rgb(63, 124, 255);
+  color: rgb(0, 102, 153);
 }
 .p:hover {
   text-decoration: underline;
-  color: rgb(63, 124, 255);
+  color: rgb(0, 102, 153);
 }
 .fs-sm {
   font-size: 0.7rem;
@@ -125,4 +125,13 @@
 .p-li {
   font-weight: normal;
   font-size: 0.8rem;
+}
+.pt-c {
+  padding-top: 50px;
+}
+.k {
+  overflow: hidden;
+}
+#profile {
+  object-fit: cover;
 }
