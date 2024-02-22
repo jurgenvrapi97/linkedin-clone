@@ -1,6 +1,6 @@
 // import { ListGroup } from "react-bootstrap";
 import { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { useSelector } from "react-redux";
 
@@ -109,13 +109,9 @@ const PostHome = ({ post }) => {
               <Modal show={showModale} onHide={handleCloseModale}>
                 <Modal.Header closeButton>
                   <Modal.Title>
-                    <img
-                      src={username.image}
-                      alt="logo"
-                      className="rounded-circle me-3"
-                      height="30px"
-                      width="30px"
-                    />
+                    <div>
+                      <img src={username.image} alt="logo" />
+                    </div>
                     {username.name}
                   </Modal.Title>
                 </Modal.Header>
@@ -128,7 +124,7 @@ const PostHome = ({ post }) => {
                       <Form.Control
                         as="textarea"
                         rows={6}
-                        className="border border-0"
+                        className="border border-0 "
                         placeholder="Di cosa vorresti parlare?"
                         value={inputPost.text}
                         onChange={handleChange}
@@ -168,57 +164,65 @@ const PostHome = ({ post }) => {
             {post.createdAt}
           </Card.Subtitle>
           <Card.Text>{post.text}</Card.Text>
-          <div>
+          <div className="text-center">
             <img src={post.image} alt="image" className="img-post" />
           </div>
           <hr />
-          <div className="d-flex justify-content-around ">
-            <Button
-              variant="outline-secondary"
-              className="border border-0 fw-medium rounded-2 d-flex align-items-center"
-              style={{ fontSize: "0.9em" }}
-            >
-              <i
-                className="bi bi-hand-thumbs-up me-1"
-                style={{ fontSize: "1.5em" }}
-              ></i>
-              Consiglia
-            </Button>
-            <Button
-              variant="outline-secondary"
-              className="border border-0 fw-medium rounded-2 d-flex align-items-center"
-              style={{ fontSize: "0.9em" }}
-              onClick={toggleCommentArea}
-            >
-              <i
-                className="bi bi-chat-left-dots me-1"
-                style={{ fontSize: "1.5em" }}
-              ></i>
-              Commenta
-            </Button>
-            <Button
-              variant="outline-secondary"
-              className="border border-0 fw-medium rounded-2 d-flex align-items-center"
-              style={{ fontSize: "0.9em" }}
-            >
-              <i
-                className="bi bi-arrow-repeat me-1"
-                style={{ fontSize: "1.5em" }}
-              ></i>
-              Diffondi il post
-            </Button>
-            <Button
-              variant="outline-secondary"
-              className="border border-0 fw-medium rounded-2 d-flex align-items-center"
-              style={{ fontSize: "0.9em" }}
-            >
-              <i
-                className="bi bi-send-fill me-1"
-                style={{ fontSize: "1.5em" }}
-              ></i>
-              Invia
-            </Button>
-          </div>
+          <Row className="d-flex justify-content-around ">
+            <Col md={12} lg={3} className="d-flex justify-content-center">
+              <Button
+                variant="outline-secondary"
+                className="border border-0 fw-medium rounded-2 d-flex align-items-center"
+                style={{ fontSize: "0.9em" }}
+              >
+                <i
+                  className="bi bi-hand-thumbs-up me-1"
+                  style={{ fontSize: "1.5em" }}
+                ></i>
+                Consiglia
+              </Button>
+            </Col>
+            <Col md={12} lg={3} className="d-flex justify-content-center">
+              <Button
+                variant="outline-secondary"
+                className="border border-0 fw-medium rounded-2 d-flex align-items-center"
+                style={{ fontSize: "0.9em" }}
+                onClick={toggleCommentArea}
+              >
+                <i
+                  className="bi bi-chat-left-dots me-1"
+                  style={{ fontSize: "1.5em" }}
+                ></i>
+                Commenta
+              </Button>
+            </Col>
+            <Col md={12} lg={3} className="d-flex justify-content-center">
+              <Button
+                variant="outline-secondary"
+                className="border border-0 fw-medium rounded-2 d-flex align-items-center"
+                style={{ fontSize: "0.9em" }}
+              >
+                <i
+                  className="bi bi-arrow-repeat me-1"
+                  style={{ fontSize: "1.5em" }}
+                ></i>
+                Diffondi il post
+              </Button>
+            </Col>
+            <Col md={12} lg={3} className="d-flex justify-content-center">
+              <Button
+                variant="outline-secondary"
+                className="border border-0 fw-medium rounded-2 d-flex align-items-center"
+                style={{ fontSize: "0.9em" }}
+              >
+                <i
+                  className="bi bi-send-fill me-1"
+                  style={{ fontSize: "1.5em" }}
+                ></i>
+                Invia
+              </Button>
+            </Col>
+          </Row>
         </Card.Body>
       </Card>
       {showCommentArea ? (
