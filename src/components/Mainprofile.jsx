@@ -32,24 +32,32 @@ const Mainprofile = ({ selector }) => {
             src="https://placebear.com/900/400"
           />
 
-          <img
-            src={profile.image}
-            className="rounded-circle position-absolute bottom-vai-sotto start-5 img-fluid mw-100 border border-light border-5"
+          <div
+            className="rounded-circle position-absolute posittion-relative bottom-vai-sotto start-5  mw-100 border border-light border-5"
             width={'150px'}
             height={'150px'}
-          />
-          {isHovered && (
-            <i
-              onClick={handleShow}
-              className="bi bi-pencil-fill text-light fs-1"
-              style={{
-                position: 'absolute',
-                top: '80%',
-                left: '13%',
-                transform: 'translate(-50%, -50%)',
-              }}
-            ></i>
-          )}
+          >
+            <img
+              id="profile"
+              src={profile.image}
+              className=" rounded-circle position-relative"
+              width={'150px'}
+              height={'150px'}
+            />{' '}
+            {isHovered && (
+              <i
+                onClick={handleShow}
+                className="bi bi-pencil-fill text-light fs-1"
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                }}
+              ></i>
+            )}
+          </div>
+
           {show && (
             <Modal show={show} onHide={handleClose} animation={false}>
               <Modal.Header className="bg-background" closeButton>

@@ -9,7 +9,7 @@ const createreducer = (state = initialState, action) => {
     case CREATE_EXPERIENCES:
       return {
         ...state,
-        experiences: [...state.newExperiences, action.payload],
+        newExperiences: [...state.newExperiences, action.payload],
       }
 
     default:
