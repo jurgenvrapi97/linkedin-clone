@@ -7,7 +7,7 @@ import { fetchExperiences } from "../redux/action";
 import { fetchExperiencesAction } from "../redux/action";
 import ModaleModificaExperience from "./ModaleModificaExperience";
 
-const Experiences = ( { tokenKey, selector }) => {
+const Experiences = ({ tokenKey, selector }) => {
   const formatDate = (dateISO) => {
     let dateObj = new Date(dateISO);
     let year = dateObj.getFullYear();
@@ -22,9 +22,9 @@ const Experiences = ( { tokenKey, selector }) => {
   const profile = useSelector(selector);
   const experiences = useSelector((state) => state.experiences.allExperiences);
   const newExperience = useSelector((state) => state.create.experiences);
-  const user = useSelector((state) => state.user.user)
-  console.log(user)
-  console.log('il profile è:', profile)
+  const user = useSelector((state) => state.user.user);
+  console.log(user);
+  console.log("il profile è:", profile);
   // const nienteData = useSelector((state) => state.action.data);
   // console.log("niente", nienteData);
 
@@ -36,9 +36,7 @@ const Experiences = ( { tokenKey, selector }) => {
   }, [dispatch, profile._id, newExperience, experiences.length]);
 
   const handleDelete = (chiave) => {
-    dispatch(
-      fetchExperiencesAction(tokenKey, profile._id, chiave, "DELETE")
-    );
+    dispatch(fetchExperiencesAction(tokenKey, profile._id, chiave, "DELETE"));
   };
 
   return (
@@ -54,19 +52,20 @@ const Experiences = ( { tokenKey, selector }) => {
                 <ListGroup>
                   <ListGroup.Item className="border border-0 d-flex">
                     <div className="d-flex flex-column ">
-
                       <div className="d-flex">
                         <div>
-                          <img src='https://placedog.net/50/50' alt='experience-logo'/>
+                          <img
+                            src="https://placedog.net/50/50"
+                            alt="experience-logo"
+                          />
                         </div>
 
                         <div className=" ms-3 ">
                           <h5 className="mb-0 lh-sm">{exp.role}</h5>
-                          <p className="mt-1 mb-2">
-                            {exp.company}
-                          </p>
+                          <p className="mt-1 mb-2">{exp.company}</p>
                           <p className="mb-0 text-secondary fw-light">
-                          da {formatDate(exp.startDate)} · a {formatDate(exp.endDate)}
+                            da {formatDate(exp.startDate)} · a{" "}
+                            {formatDate(exp.endDate)}
                           </p>
                           <p className="mb-0 text-secondary fw-light">
                             {exp.area}
@@ -76,16 +75,20 @@ const Experiences = ( { tokenKey, selector }) => {
                       </div>
                       {user._id === profile._id && (
                         <div className="mt-2 d-flex justify-content-start">
-                          <Button variant="outline-danger" className='border border-0 rounded-circle' onClick={() => handleDelete(exp._id)}><i className="bi bi-trash3 fs-5"></i></Button>
+                          <Button
+                            variant="outline-danger"
+                            className="border border-0 rounded-circle"
+                            onClick={() => handleDelete(exp._id)}
+                          >
+                            <i className="bi bi-trash3 fs-5"></i>
+                          </Button>
                           <ModaleModificaExperience chiave={exp._id} />
                         </div>
                       )}
-
                     </div>
                   </ListGroup.Item>
                 </ListGroup>
               </CardBody>
-
             </div>
           ))
         ) : (
