@@ -14,6 +14,7 @@ import Experiences from "./components/Experiences";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import { useState } from "react";
+import Jobs from "./components/Jobs";
 
 function App() {
   const userSelector = (state) => state.user.user;
@@ -44,7 +45,6 @@ function App() {
                       <MyAside />
                     </Col>
                   </Row>
-                  <MSGbar />
                   <Footer />
                 </>
               }
@@ -62,7 +62,6 @@ function App() {
                       <MyAside />
                     </Col>
                   </Row>
-                  <MSGbar />
                   <Footer />
                 </>
               }
@@ -71,7 +70,9 @@ function App() {
               path="/"
               element={<Home selector={userSelector} tokenKey={tokenKey} />}
             />
+            <Route path="/jobs" element={<Jobs />} />
           </Routes>
+          <MSGbar />
         </Container>
       </div>
     </BrowserRouter>

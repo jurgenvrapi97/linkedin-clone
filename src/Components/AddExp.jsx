@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchExperiencesCreate } from '../redux/action'
 import Button from 'react-bootstrap/Button'
@@ -79,9 +79,14 @@ const AddExp = () => {
   }
   const handleSubmit = async (event) => {
     event.preventDefault()
-    // setShow(false)
-    await dispatch(fetchExperiencesCreate(tokens.jurgen, username._id, form))
-
+    setShow(false)
+    await dispatch(
+      fetchExperiencesCreate(
+        tokens[username.name.toLowerCase()],
+        username._id,
+        form
+      )
+    )
     dispatch(
       fetchExperiences(tokens[username.name.toLowerCase()], username._id)
     )
