@@ -201,9 +201,9 @@ const Home = ({ selector, tokenKey }) => {
                       )}
                     </div>
 
-                    <Button
+                    <div
                       onSubmit={handleSubmit}
-                      className="bg-transparent w-100 text text-dark"
+                      className="w-100 form-control"
                     >
                       <Row>
                         <Col>
@@ -259,7 +259,7 @@ const Home = ({ selector, tokenKey }) => {
                           </Modal>
                         </Col>
                       </Row>
-                    </Button>
+                    </div>
                   </ListGroup.Item>
                 </ListGroup>
               </CardBody>
