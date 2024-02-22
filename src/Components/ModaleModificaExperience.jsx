@@ -1,16 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchExperiencesCreate } from "../redux/action";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Col, Container, Row } from "react-bootstrap";
+import { fetchExperiencesAction } from "../redux/action";
 
-const AddExp = () => {
-  //state modale
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+const ModaleModificaExperience = ({ chiave }) => {
   const dispatch = useDispatch();
   const username = useSelector((state) => {
     return state.user.user;
@@ -19,6 +14,21 @@ const AddExp = () => {
     return state.user.tokens;
   });
 
+  const modificaQuestoCommento = useSelector((state) => state.action.data);
+
+  useEffect(() => {
+    if (modificaQuestoCommento) {
+      setForm({
+        role: modificaQuestoCommento.role,
+        company: modificaQuestoCommento.company,
+        startDate: modificaQuestoCommento.startDate,
+        endDate: modificaQuestoCommento.endDate,
+        description: modificaQuestoCommento.description,
+        area: modificaQuestoCommento.area,
+      });
+    }
+  }, [modificaQuestoCommento]);
+
   const [form, setForm] = useState({
     role: "",
     company: "",
@@ -26,8 +36,34 @@ const AddExp = () => {
     endDate: "",
     description: "",
     area: "",
-    image: "",
   });
+
+  //state modale
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setShow(true),
+      dispatch(
+        fetchExperiencesAction(
+          tokens[username.name.toLowerCase()],
+          username._id,
+          chiave,
+          "GET"
+        )
+      );
+  };
+
+  const experiences = useSelector((state) => state.experiences.allExperiences);
+  useEffect(() => {
+    dispatch(
+      fetchExperiencesAction(
+        tokens[username.name.toLowerCase()],
+        username._id,
+        chiave,
+        "GET"
+      )
+    );
+  }, [experiences]);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -40,26 +76,56 @@ const AddExp = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(username.name);
     setShow(false);
     dispatch(
-      fetchExperiencesCreate(
+      fetchExperiencesAction(
         tokens[username.name.toLowerCase()],
         username._id,
+        chiave,
+        "PUT",
         form
       )
     );
   };
 
+  const [file, setFile] = useState();
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    let formData = new FormData();
+
+    formData.append("experience", file);
+
+    try {
+      let response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${username._id}/experiences/${chiave}/picture`,
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: "Bearer" + tokens[username.name.toLowerCase()],
+          },
+        }
+      );
+      let data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Button variant="outline-secondary" className="border border-0 rounded-circle" onClick={handleShow}>
-      <i className="bi bi-plus-lg fs-5"></i>
+      <i className="bi bi-pencil fs-5"></i>
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header className="bg-background" closeButton>
-          <Modal.Title>Inserisci una nuova esperienza</Modal.Title>
+          <Modal.Title>Modifica esperienza</Modal.Title>
         </Modal.Header>
         <Container className="py-2">
           <form onSubmit={handleSubmit}>
@@ -74,7 +140,6 @@ const AddExp = () => {
                   onChange={handleChange}
                 />
               </Col>
-
               <Col className="d-flex flex-column">
                 <label htmlFor="company">Compagnia</label>
                 <input
@@ -124,7 +189,6 @@ const AddExp = () => {
                 />
               </Col>
               <Col className="d-flex col-12 flex-column">
-                {" "}
                 <label htmlFor="description">Descrizione</label>
                 <textarea
                   id="description"
@@ -133,6 +197,10 @@ const AddExp = () => {
                   onChange={handleChange}
                 />
               </Col>
+              <div className="d-flex justify-content-around mt-2">
+                <input aria-describedby="inputGroupFileAddon04" aria-label="Upload" type="file" className="form-control w-75" onChange={handleFileChange} />
+                <Button variant="outline-primary" onClick={handleUpload}>Carica</Button>
+              </div>
             </Row>
             <Row className="justify-content-end">
               <Col className="col-3 d-flex justify-content-end">
@@ -146,4 +214,4 @@ const AddExp = () => {
   );
 };
 
-export default AddExp;
+export default ModaleModificaExperience;
