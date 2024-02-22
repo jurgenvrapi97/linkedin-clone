@@ -1,8 +1,9 @@
 // import { ListGroup } from "react-bootstrap";
-import { useState } from "react";
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Button, Col, Form, ListGroup, Modal, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllComments } from "../redux/action";
 
 const PostHome = ({ post }) => {
   const [showCommentArea, setShowCommentArea] = useState(false);
@@ -112,6 +113,14 @@ const PostHome = ({ post }) => {
       console.error("Error deleting post:", error);
     }
   };
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchAllComments());
+  }, [dispatch]);
+
+  const allComments = useSelector((state) => state.allComments.allComments);
+
   return (
     <>
       <Card className="mb-2">
@@ -251,10 +260,16 @@ const PostHome = ({ post }) => {
       {showCommentArea ? (
         <div className="bg-white border-1 rounded-2 p-3 mb-2 border border-1">
           <h5>Commenti:</h5>
-          <ul>
-            {/* .map(lista commenti del post) */}
-            <li></li>
-          </ul>
+          <ListGroup>
+            {allComments.length > 0 &&
+              allComments
+                .slice(0, 10)
+                .map((commento) => (
+                  <ListGroup.Item key={commento._id}>
+                    {commento.comment}
+                  </ListGroup.Item>
+                ))}
+          </ListGroup>
         </div>
       ) : (
         ""
