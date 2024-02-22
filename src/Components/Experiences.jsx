@@ -23,8 +23,8 @@ const Experiences = ({ tokenKey, selector }) => {
   const experiences = useSelector((state) => state.experiences.allExperiences)
   const newExperience = useSelector((state) => state.create.experiences)
   const user = useSelector((state) => state.user.user)
-  console.log(user)
-  console.log('il profile è:', profile)
+  // console.log(user)
+  // console.log('il profile è:', profile)
   // const nienteData = useSelector((state) => state.action.data);
   // console.log("niente", nienteData);
 
@@ -33,9 +33,10 @@ const Experiences = ({ tokenKey, selector }) => {
       dispatch(fetchExperiences(tokenKey, profile._id))
       console.log('partita')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, profile._id, newExperience, experiences.length])
 
-  console.log(experiences.length)
+  // console.log(experiences.length)
 
   const handleDelete = (chiave) => {
     dispatch(fetchExperiencesAction(tokenKey, profile._id, chiave, 'DELETE'))
@@ -57,7 +58,11 @@ const Experiences = ({ tokenKey, selector }) => {
                     <div className="d-flex flex-column ">
                       <div className="d-flex">
                         <div>
-                          <img src={exp.image} alt="experience-logo" />
+                          <img
+                            className="img-exp rounded-circle"
+                            src={exp.image}
+                            alt="experience-logo"
+                          />
                         </div>
 
                         <div className=" ms-3 ">

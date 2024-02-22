@@ -1,8 +1,12 @@
 import { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 function ImageUpload() {
   const [file, setFile] = useState()
+
+  const profile = useSelector((state) => state.user.user)
+  const tokens = useSelector((state) => state.user.tokens)
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0])
@@ -20,8 +24,7 @@ function ImageUpload() {
           method: 'POST',
           body: formData,
           headers: {
-            Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWQzMTUwMzI0ZjYwNTAwMTkzN2Q0NjkiLCJpYXQiOjE3MDgzMzIyOTEsImV4cCI6MTcwOTU0MTg5MX0.Dvp9xjhvg1QFWbOGGaWpXWP1M-7JHhQLM0zCwLO1doM',
+            Authorization: 'Bearer ' + tokens[profile.name.toLowerCase()],
           },
         }
       )
