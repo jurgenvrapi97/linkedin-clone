@@ -128,18 +128,19 @@ const PostHome = ({ post }) => {
           <div className="d-flex justify-content-between">
             <Card.Title>{post.username}</Card.Title>
             <div>
-              <Button
+              {username._id === post.user._id && <Button
                 className="h rounded-5 p-2 bg-transparent border-0"
                 onClick={handleShowModale}
                 variant="black"
               >
                 <i className="bi bi-pencil"></i>
-              </Button>
+              </Button>}
+
               <Modal show={showModale} onHide={handleCloseModale}>
                 <Modal.Header closeButton>
                   <Modal.Title>
-                    <div>
-                      <img src={username.image} alt="logo" />
+                    <div className="d-inline me-2">
+                      <img src={username.image} alt="logo" style={{height: '2em'}} className="rounded-circle"/>
                     </div>
                     {username.name}
                   </Modal.Title>
@@ -184,12 +185,13 @@ const PostHome = ({ post }) => {
                   </div>
                 </Modal.Body>
               </Modal>
-              <Button
+              {username._id === post.user._id && <Button
                 className="bg-transparent border-0"
                 onClick={() => handleDelete(post._id)}
               >
                 <i className="bi bi-trash text-danger "></i>
-              </Button>
+              </Button>}
+
             </div>
           </div>
           <Card.Subtitle className="mb-2 text-muted">
@@ -197,7 +199,8 @@ const PostHome = ({ post }) => {
           </Card.Subtitle>
           <Card.Text>{post.text}</Card.Text>
           <div className="text-center">
-            <img src={post.image} alt="image" className="img-post" />
+            {post.image &&  <img src={post.image} alt="image" className="img-post" />}
+           
           </div>
           <hr />
           <Row className="d-flex justify-content-around ">

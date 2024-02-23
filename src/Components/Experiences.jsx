@@ -60,7 +60,7 @@ const Experiences = ({ tokenKey, selector }) => {
                         <div>
                           <img
                             className="img-exp rounded-circle"
-                            src={exp.image}
+                            src={exp.image? (exp.image) : ("http://placekitten.com/70/70")}
                             alt="experience-logo"
                           />
                         </div>

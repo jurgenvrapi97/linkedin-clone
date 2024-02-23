@@ -296,7 +296,6 @@ export const fetchSearchAllJobs = (value) => {
   };
 };
 
-
 export const fetchAllComments = () => {
   return async (dispatch) => {
     const response = await fetch(
@@ -309,14 +308,22 @@ export const fetchAllComments = () => {
         },
         "Content-Type": "application/json",
       }
-      dispatch({ type: FETCH_ALL_COMMENTS, payload: data });
     );
-    }}
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    dispatch({ type: FETCH_ALL_COMMENTS, payload: data });
+  };
+};
+
 export const fetchCompanyAllJobs = (value) => {
   return async (dispatch) => {
     const response = await fetch(
       "https://strive-benchmark.herokuapp.com/api/jobs?company=" + value
-    )
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -338,6 +345,5 @@ export const fetchCategoryAllJobs = (value) => {
 
     const data = await response.json();
     dispatch({ type: FETCH_CATEGORY_JOBS, payload: data });
-  
   };
 };
