@@ -18,8 +18,9 @@ const MSGbar = () => {
     setExpandWrite((prevState) => !prevState);
   };
 
+
   return (
-    <>
+    <div>
       <div
         className={`d-none d-md-flex  flex-column border mn border-1 rounded-top border-secondary bg-white ${
           isExpanded ? "s" : "ns"
@@ -184,7 +185,7 @@ const MSGbar = () => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -44,6 +44,7 @@ function App() {
                       <MyAside />
                     </Col>
                   </Row>
+                  <MSGbar />
                   <Footer />
                 </>
               }
@@ -62,6 +63,7 @@ function App() {
                       <MyAside />
                     </Col>
                   </Row>
+                  <MSGbar />
                   <Footer />
                 </>
               }
@@ -72,6 +74,7 @@ function App() {
                 <>
                   <MyNav setTokenKey={setTokenKey} placeholder="Cerca" />
                   <Home selector={userSelector} tokenKey={tokenKey} />
+                  <MSGbar />
                 </>
               }
             />
@@ -84,6 +87,7 @@ function App() {
                     placeholder="Cerca un lavoro, azienda, ..."
                   />
                   <Jobs />
+                  <MSGbar />
                 </>
               }
             />
@@ -96,7 +100,6 @@ function App() {
               }
             />
           </Routes>
-          <MSGbar />
         </Container>
       </div>
     </BrowserRouter>

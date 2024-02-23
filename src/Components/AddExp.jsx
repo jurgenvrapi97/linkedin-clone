@@ -183,11 +183,11 @@ const AddExp = () => {
             </Row>
             <Row className="justify-content-end">
               <Col className="col-3 d-flex justify-content-end">
-                <Button type="submit">AGGIUNGI</Button>
+                <Button variant="outline-primary" type="submit">Carica</Button>
               </Col>
             </Row>
           </form>
-          <div className="d-flex justify-content-around mt-2">
+          <div className="d-flex justify-content-between mt-2">
             <input
               aria-describedby="inputGroupFileAddon04"
               aria-label="Upload"
@@ -195,7 +195,7 @@ const AddExp = () => {
               className="form-control w-75"
               onChange={handleFileChange}
             />
-            <button onClick={handleUpload}>carica</button>
+            <button onClick={handleUpload} className="btn btn-primary ">Salva</button>
           </div>
         </Container>
       </Modal>

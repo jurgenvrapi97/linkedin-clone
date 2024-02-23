@@ -255,6 +255,13 @@ const PostHome = ({ post }) => {
 
   const allComments = useSelector((state) => state.allComments.allComments)
 
+
+  function convertiDataEOraInItaliano(data) {
+    const opzioni = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    return data.toLocaleDateString('it-IT', opzioni);
+}
+
+
   return (
     <>
       <Card className="mb-2">
@@ -302,15 +309,12 @@ const PostHome = ({ post }) => {
                       />
                     </Form.Group>
                     <Modal.Footer>
-                      <Button variant="secondary" onClick={handleCloseModale}>
-                        Close
-                      </Button>
                       <Button
                         type="submit"
-                        variant="primary"
+                        variant="outline-primary"
                         onClick={handlePutPost}
                       >
-                        Save Changes
+                       Carica testo
                       </Button>
                     </Modal.Footer>
                   </Form>
@@ -322,7 +326,7 @@ const PostHome = ({ post }) => {
                       className="form-control w-75"
                       onChange={handleFileChange}
                     />
-                    <button onClick={handleUpload}>carica</button>
+                    <button onClick={handleUpload} className='btn btn-primary '>Salva post</button>
                   </div>
                 </Modal.Body>
               </Modal>
@@ -337,7 +341,7 @@ const PostHome = ({ post }) => {
             </div>
           </div>
           <Card.Subtitle className="mb-2 text-muted">
-            {post.createdAt}
+            {convertiDataEOraInItaliano(new Date (post.createdAt))}
           </Card.Subtitle>
           <Card.Text>{post.text}</Card.Text>
           <div className="text-center">
@@ -410,14 +414,14 @@ const PostHome = ({ post }) => {
             {allComments.length > 0 &&
               allComments.slice(0, 10).map((commento) => (
                 <ListGroup.Item className="p-3" key={commento._id}>
-                  <div className="d-flex justify-content-between">
-                    <div>
+                  <div className="d-flex justify-content-between row">
+                    <div className='col-8'>
                       <p className="fs-5 text-primary fw-medium">
                         {commento.author}
                       </p>
                       {commento.comment}
                     </div>
-                    <div>
+                    <div className='col-4 p-0 text-end'>
                       <Button
                         variant="danger"
                         className="mx-2 "

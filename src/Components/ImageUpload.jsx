@@ -43,11 +43,11 @@ function ImageUpload({ handleClose }) {
         <Row>
           <Col className="m-2">
             <input
-              className="d-block mb-5"
+              className="d-block mb-5 form-control"
               type="file"
               onChange={handleFileChange}
             />
-            <Button onClick={handleUpload}>Carica</Button>
+            <Button onClick={handleUpload} className="me-2">Carica</Button>
             <Button onClick={handleClose}>Chiudi</Button>
           </Col>
         </Row>

@@ -283,14 +283,8 @@ const Home = ({ selector, tokenKey }) => {
                                   />
                                 </Form.Group>
                                 <Modal.Footer>
-                                  <Button
-                                    variant="secondary"
-                                    onClick={handleCloseModale}
-                                  >
-                                    Close
-                                  </Button>
-                                  <Button type="submit" variant="primary">
-                                    Save Changes
+                                  <Button variant="outline-primary" type="submit" >
+                                    Carica testo
                                   </Button>
                                 </Modal.Footer>
                               </Form>
@@ -302,7 +296,7 @@ const Home = ({ selector, tokenKey }) => {
                                   className="form-control w-75"
                                   onChange={handleFileChange}
                                 />
-                                <button onClick={handleUpload}>carica</button>
+                                <button className="btn btn-primary" onClick={handleUpload}>Salva post</button>
                               </div>
                             </Modal.Body>
                           </Modal>
