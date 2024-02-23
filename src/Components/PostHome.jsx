@@ -1,9 +1,18 @@
 // import { ListGroup } from "react-bootstrap";
 import { useState } from 'react'
-import { Button, Col, Form, ListGroup, Modal, Row } from 'react-bootstrap'
+import {
+  Button,
+  Col,
+  Form,
+  InputGroup,
+  ListGroup,
+  Modal,
+  Row,
+} from 'react-bootstrap'
+
 import Card from 'react-bootstrap/Card'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllComments } from '../redux/action'
+import { fetchAllComments, fetchAllPosts } from '../redux/action'
 
 const PostHome = ({ post }) => {
   const dispatch = useDispatch()
@@ -22,6 +31,125 @@ const PostHome = ({ post }) => {
   const [inputPost, setInputPost] = useState({
     text: '',
   })
+  const [inputComment, setInputComment] = useState({
+    comment: '',
+  })
+
+  const [ModInputComment, setModInputComment] = useState({
+    comment: '',
+  })
+
+  const handleChangeComment = (event) => {
+    const value = event.target.value
+    setModInputComment({
+      ...ModInputComment,
+      text: value,
+    })
+  }
+
+  const handleNewComment = async (e) => {
+    e.preventDefault()
+
+    try {
+      let response = await fetch(
+        'https://striveschool-api.herokuapp.com/api/comments',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            ...inputComment,
+            rate: 5,
+            elementId: post._id,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + tokens[username.name.toLowerCase()],
+          },
+        }
+      )
+
+      if (response.ok) {
+        console.log('Comment updated successfully')
+        doFetch()
+        setInputComment({
+          ...inputComment,
+          comment: '',
+        })
+      } else {
+        console.error('Failed to update comment')
+      }
+    } catch (error) {
+      console.error('Error updating comment:', error)
+    }
+  }
+
+  const handleModComment = async (e) => {
+    e.preventDefault()
+
+    try {
+      let response = await fetch(
+        'https://striveschool-api.herokuapp.com/api/comments',
+        {
+          method: 'PUT',
+          body: JSON.stringify({
+            ...inputComment,
+            rate: 5,
+            elementId: post._id,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + tokens[username.name.toLowerCase()],
+          },
+        }
+      )
+
+      if (response.ok) {
+        console.log('Comment updated successfully')
+        doFetch()
+        setInputComment({
+          ...inputComment,
+          comment: '',
+        })
+      } else {
+        console.error('Failed to update comment')
+      }
+    } catch (error) {
+      console.error('Error updating comment:', error)
+    }
+  }
+
+  const deleteComment = async (indice) => {
+    console.log(indice)
+    try {
+      let response = await fetch(
+        'https://striveschool-api.herokuapp.com/api/comments/' + indice,
+        {
+          method: 'DELETE',
+
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + tokens[username.name.toLowerCase()],
+          },
+        }
+      )
+
+      if (response.ok) {
+        console.log('Comment DELETE successfully')
+        doFetch()
+      } else {
+        console.error('Failed to update comment')
+      }
+    } catch (error) {
+      console.error('Error updating comment:', error)
+    }
+  }
+
+  const handleCommentChange = (event) => {
+    const value = event.target.value
+    setInputComment({
+      ...inputComment,
+      comment: value,
+    })
+  }
 
   const fetchModificaPost = async () => {
     try {
@@ -41,6 +169,7 @@ const PostHome = ({ post }) => {
           ...prevInputPost,
           text: inputPost.text,
         }))
+        dispatch(fetchAllPosts(tokens[username.name.toLowerCase()]))
         console.log('Post updated successfully')
       } else {
         console.error('Failed to update post')
@@ -111,6 +240,7 @@ const PostHome = ({ post }) => {
       )
       if (response.ok) {
         console.log('Post deleted successfully')
+        dispatch(fetchAllPosts(tokens[username.name.toLowerCase()]))
       } else {
         console.error('Failed to delete post')
       }
@@ -274,13 +404,41 @@ const PostHome = ({ post }) => {
           <h5>Commenti:</h5>
           <ListGroup>
             {allComments.length > 0 &&
-              allComments
-                .slice(0, 10)
-                .map((commento) => (
-                  <ListGroup.Item key={commento._id}>
-                    {commento.comment}
-                  </ListGroup.Item>
-                ))}
+              allComments.slice(0, 10).map((commento) => (
+                <ListGroup.Item className="p-3" key={commento._id}>
+                  <p className="fs-5 text-primary fw-medium">
+                    {commento.author}
+                  </p>
+                  {commento.comment}
+                  <button onClick={() => deleteComment(commento._id)}>
+                    cancella
+                  </button>
+                </ListGroup.Item>
+              ))}
+
+            <InputGroup className="my-3">
+              <Form.Control
+                placeholder="add a comment"
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2"
+                type="text"
+                value={inputComment.comment}
+                name="commento"
+                id=""
+                onChange={handleCommentChange}
+              />
+              <Button
+                type="submit"
+                onClick={handleNewComment}
+                variant="outline-secondary"
+                id="button-addon2"
+              >
+                <i
+                  className="bi bi-send-fill me-1"
+                  style={{ fontSize: '1.5em' }}
+                ></i>
+              </Button>
+            </InputGroup>
           </ListGroup>
         </div>
       ) : (
