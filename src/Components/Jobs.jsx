@@ -143,12 +143,6 @@ const Jobs = () => {
                             >
                               Close
                             </Button>
-                            <Button
-                              variant="primary"
-                              onClick={handleCloseCompany}
-                            >
-                              Save Changes
-                            </Button>
                           </Modal.Footer>
                         </Modal>
                       </Card.Title>

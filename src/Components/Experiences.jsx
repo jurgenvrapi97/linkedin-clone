@@ -38,7 +38,7 @@ const Experiences = ({ tokenKey, selector }) => {
 
   return (
     <>
-      <Card className="d-none d-md-flex" md={12} lg={12}>
+      <Card md={12} lg={12}>
         <Card.Title className="p-3 d-flex justify-content-between align-items-center mb-0">
           Esperienze {user._id === profile._id && <AddExp />}
         </Card.Title>
@@ -47,12 +47,12 @@ const Experiences = ({ tokenKey, selector }) => {
             <div key={exp._id}>
               <CardBody className="p-1">
                 <ListGroup>
-                  <ListGroup.Item className="border border-0 d-flex">
-                    <div className="d-flex flex-column ">
+                  <ListGroup.Item className="border border-0 d-flex ">
+                    <div className="d-flex flex-column px-4">
                       <div className="d-flex">
                         <div>
                           <img
-                            className="img-exp rounded-circle"
+                            className="img-exp rounded-circle me-5"
                             src={
                               exp.image
                                 ? exp.image
@@ -91,6 +91,9 @@ const Experiences = ({ tokenKey, selector }) => {
                   </ListGroup.Item>
                 </ListGroup>
               </CardBody>
+              <div className="px-5">
+                <hr />
+              </div>
             </div>
           ))
         ) : (
