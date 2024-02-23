@@ -1,85 +1,84 @@
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchExperiencesCreate } from '../redux/action'
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
-import { Col, Container, Row } from 'react-bootstrap'
-import { fetchExperiences } from '../redux/action'
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchExperiencesCreate } from "../redux/action";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { Col, Container, Row } from "react-bootstrap";
+import { fetchExperiences } from "../redux/action";
 
 const AddExp = () => {
   //state modale
   const lastExp = useSelector(
     (state) =>
       state.create.newExperiences[state.create.newExperiences.length - 1]
-  )
+  );
 
   if (lastExp) {
-    console.log(lastExp._id)
     // Qui puoi chiamare la tua funzione per caricare l'immagine
   }
 
-  const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const username = useSelector((state) => {
-    return state.user.user
-  })
+    return state.user.user;
+  });
   const tokens = useSelector((state) => {
-    return state.user.tokens
-  })
+    return state.user.tokens;
+  });
   const [form, setForm] = useState({
-    role: '',
-    company: '',
-    startDate: '',
-    endDate: '',
-    description: '',
-    area: '',
-  })
+    role: "",
+    company: "",
+    startDate: "",
+    endDate: "",
+    description: "",
+    area: "",
+  });
 
   const handleChange = (event) => {
-    const name = event.target.name
-    const value = event.target.value
+    const name = event.target.name;
+    const value = event.target.value;
     setForm({
       ...form,
       [name]: value,
-    })
-  }
-  const [file, setFile] = useState()
+    });
+  };
+  const [file, setFile] = useState();
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0])
-  }
+    setFile(event.target.files[0]);
+  };
 
   const handleUpload = async () => {
-    setShow(false)
-    let formData = new FormData()
+    setShow(false);
+    let formData = new FormData();
 
-    formData.append('experience', file)
+    formData.append("experience", file);
 
     try {
       let response = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${username._id}/experiences/${lastExp._id}/picture`,
         {
-          method: 'POST',
+          method: "POST",
           body: formData,
           headers: {
-            Authorization: 'Bearer ' + tokens[username.name.toLowerCase()],
+            Authorization: "Bearer " + tokens[username.name.toLowerCase()],
           },
         }
-      )
-      let data = await response.json()
-      console.log(data)
+      );
+      let data = await response.json();
+      console.log(data);
       dispatch(
         fetchExperiences(tokens[username.name.toLowerCase()], username._id)
-      )
+      );
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
   const handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     await dispatch(
       fetchExperiencesCreate(
@@ -87,16 +86,23 @@ const AddExp = () => {
         username._id,
         form
       )
-    )
+    );
     dispatch(
       fetchExperiences(tokens[username.name.toLowerCase()], username._id)
-    )
-  }
+    );
+  };
 
   return (
     <>
-      <Button variant="outline-secondary" className='border border-0 rounded-circle' onClick={handleShow}>
-      <i className="bi bi-plus-lg text-dark" style={{fontSize: '1.5em'}}></i>
+      <Button
+        variant="outline-secondary"
+        className="border border-0 rounded-circle"
+        onClick={handleShow}
+      >
+        <i
+          className="bi bi-plus-lg text-dark"
+          style={{ fontSize: "1.5em" }}
+        ></i>
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
@@ -165,7 +171,7 @@ const AddExp = () => {
                 />
               </Col>
               <Col className="d-flex col-12 flex-column">
-                {' '}
+                {" "}
                 <label htmlFor="description">Descrizione</label>
                 <textarea
                   id="description"
@@ -194,7 +200,7 @@ const AddExp = () => {
         </Container>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default AddExp
+export default AddExp;
