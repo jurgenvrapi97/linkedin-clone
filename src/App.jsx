@@ -21,7 +21,6 @@ function App() {
   const userSelector = (state) => state.user.user;
   const idSelector = (state) => state.idUser.user;
   const [tokenKey, setTokenKey] = useState("");
-  console.log("il token è:", tokenKey);
 
   return (
     <BrowserRouter>
