@@ -59,9 +59,13 @@ const Experiences = ({ tokenKey, selector }) => {
                       <div className="d-flex">
                         <div>
                           <img
-                            src={exp.image}
+                            className="img-exp rounded-circle"
+                            src={
+                              exp.image
+                                ? exp.image
+                                : "http://placekitten.com/70/70"
+                            }
                             alt="experience-logo"
-                            className="rounded-circle img-exp "
                           />
                         </div>
 

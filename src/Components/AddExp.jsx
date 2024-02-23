@@ -53,6 +53,7 @@ const AddExp = () => {
   }
 
   const handleUpload = async () => {
+    setShow(false)
     let formData = new FormData()
 
     formData.append('experience', file)
@@ -79,7 +80,7 @@ const AddExp = () => {
   }
   const handleSubmit = async (event) => {
     event.preventDefault()
-    setShow(false)
+
     await dispatch(
       fetchExperiencesCreate(
         tokens[username.name.toLowerCase()],
@@ -94,8 +95,8 @@ const AddExp = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        <i className="bi bi-plus-circle-fill"></i>
+      <Button variant="outline-secondary" className='border border-0 rounded-circle' onClick={handleShow}>
+      <i className="bi bi-plus-lg text-dark" style={{fontSize: '1.5em'}}></i>
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
