@@ -8,6 +8,8 @@ export const FETCH_POSTS = "FETCH_POSTS";
 export const FETCH_JOBS = "FETCH_JOBS";
 export const CREATE_POST = "CREATE_POST";
 export const FETCH_SEARCH_JOBS = "FETCH_SEARCH_JOBS";
+export const FETCH_COMPANY_JOBS = "FETCH_COMPANY_JOBS";
+export const FETCH_CATEGORY_JOBS = "FETCH_CATEGORY_JOBS";
 
 export const fetchProfile = (token) => {
   return async (dispatch) => {
@@ -290,5 +292,35 @@ export const fetchSearchAllJobs = (value) => {
 
     const data = await response.json();
     dispatch({ type: FETCH_SEARCH_JOBS, payload: data });
+  };
+};
+
+export const fetchCompanyAllJobs = (value) => {
+  return async (dispatch) => {
+    const response = await fetch(
+      "https://strive-benchmark.herokuapp.com/api/jobs?company=" + value
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    dispatch({ type: FETCH_COMPANY_JOBS, payload: data });
+  };
+};
+
+export const fetchCategoryAllJobs = (value) => {
+  return async (dispatch) => {
+    const response = await fetch(
+      `https://strive-benchmark.herokuapp.com/api/jobs?category=${value}&limit=10`
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    dispatch({ type: FETCH_CATEGORY_JOBS, payload: data });
   };
 };

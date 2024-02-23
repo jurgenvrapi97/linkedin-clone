@@ -25,14 +25,13 @@ function App() {
   return (
     <BrowserRouter>
       <div className="bg-background">
-        <MyNav setTokenKey={setTokenKey} />
-
         <Container>
           <Routes>
             <Route
               path="/profile"
               element={
                 <>
+                <MyNav setTokenKey={setTokenKey} placeholder="Cerca"/>
                   <Row className="mt-5">
                     <Col md={8} lg={8} className="mt-5">
                       <Mainprofile selector={userSelector} />
@@ -53,6 +52,7 @@ function App() {
               path="/profile/:userId"
               element={
                 <>
+                  <MyNav setTokenKey={setTokenKey} placeholder="Cerca"/>
                   <Row>
                     <Col md={8} lg={8} style={{ marginTop: "6em" }}>
                       <Mainprofile selector={idSelector} />
@@ -68,9 +68,16 @@ function App() {
             />
             <Route
               path="/"
-              element={<Home selector={userSelector} tokenKey={tokenKey} />}
+              element={
+              <>
+              <MyNav setTokenKey={setTokenKey} placeholder="Cerca"/>
+              <Home selector={userSelector} tokenKey={tokenKey} />
+              </>}
             />
-            <Route path="/jobs" element={<Jobs />} />
+            <Route path="/jobs" element={<>
+            <MyNav setTokenKey={setTokenKey} placeholder="Cerca un lavoro, azienda, ..."/> 
+            <Jobs />
+            </>} />
           </Routes>
           <MSGbar />
         </Container>

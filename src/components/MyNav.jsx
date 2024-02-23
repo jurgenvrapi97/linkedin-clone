@@ -12,11 +12,12 @@ import {
   fetchGeneric,
   fetchId,
   logOutAction,
+  fetchSearchAllJobs,
 } from "../redux/action";
 import ListGroup from "react-bootstrap/ListGroup";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
-const MyNav = ({ setTokenKey }) => {
+const MyNav = ({ setTokenKey, placeholder }) => {
   const [inputValue, setInputValue] = useState("");
   const [inputSearch, setInputSearch] = useState("");
   // eslint-disable-next-line no-unused-vars
@@ -26,7 +27,7 @@ const MyNav = ({ setTokenKey }) => {
   const username = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const location = useLocation()
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -49,6 +50,7 @@ const MyNav = ({ setTokenKey }) => {
     const token = tokens[tokenKey];
     dispatch(fetchGeneric(token));
     setShowDropdown(value.trim().length > 0);
+    dispatch(fetchSearchAllJobs(inputSearch))
     console.log(token);
   };
 
@@ -67,10 +69,13 @@ const MyNav = ({ setTokenKey }) => {
     // da eseguire al momento del logout, come reindirizzamento, ecc.
   };
 
+
+
   useEffect(() => {
     // Nascondi il menu a tendina se entrambi l'input di ricerca e l'array dei risultati di ricerca sono vuoti
     if (inputSearch.trim().length === 0) {
       setShowDropdown(false);
+      setInputSearch("")
     }
   }, [inputSearch, search, inputValue]);
 
@@ -101,7 +106,7 @@ const MyNav = ({ setTokenKey }) => {
             <Form.Control
               style={{ backgroundColor: "#edf3f8" }}
               className="border-0 rounded-end"
-              placeholder="Cerca"
+              placeholder={placeholder}
               aria-label="Cerca"
               aria-describedby="basic-addon1"
               value={inputSearch}
@@ -110,7 +115,7 @@ const MyNav = ({ setTokenKey }) => {
           </InputGroup>
           <ListGroup className="position-absolute top-100 ms-5 z-3 w-25 ">
             {/* Mostra il menu a tendina solo se ci sono risultati di ricerca */}
-            {showDropdown &&
+            {showDropdown && location.pathname !== "/jobs" &&
               search
                 .filter(
                   (result) =>
