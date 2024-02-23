@@ -15,6 +15,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import { useState } from "react";
 import Jobs from "./components/Jobs";
+import NotFoundPage from "./components/NotFoundPage";
 
 function App() {
   const userSelector = (state) => state.user.user;
@@ -83,6 +84,14 @@ function App() {
                     placeholder="Cerca un lavoro, azienda, ..."
                   />
                   <Jobs />
+                </>
+              }
+            />
+            <Route
+              path="/*"
+              element={
+                <>
+                  <NotFoundPage />
                 </>
               }
             />

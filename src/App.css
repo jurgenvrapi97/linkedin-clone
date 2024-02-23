@@ -144,3 +144,43 @@
   width: 70%;
   height: 30%;
 }
+
+/* sezione 404 not found di harry potter */
+.harry-potter-bg {
+  background-color: #000;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.harry-potter-container {
+  text-align: center;
+}
+
+.harry-potter-logo {
+  width: 600px;
+  margin-bottom: 40px;
+}
+
+.harry-potter-heading {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.harry-potter-text {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.harry-potter-btn {
+  background-color: #d3ad6b;
+  border-color: #d3ad6b;
+  color: #000;
+  font-weight: bold;
+  &:hover {
+    background-color: #b08940;
+    border-color: #b08940;
+    color: #000;
+  }
+}
