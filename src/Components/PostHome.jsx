@@ -39,11 +39,16 @@ const PostHome = ({ post }) => {
     comment: '',
   })
 
+  const [show, setShow] = useState(false)
+
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
   const handleChangeComment = (event) => {
     const value = event.target.value
     setModInputComment({
       ...ModInputComment,
-      text: value,
+      comment: value,
     })
   }
 
@@ -82,16 +87,14 @@ const PostHome = ({ post }) => {
     }
   }
 
-  const handleModComment = async (e) => {
-    e.preventDefault()
-
+  const handleModComment = async (indice) => {
     try {
       let response = await fetch(
-        'https://striveschool-api.herokuapp.com/api/comments',
+        'https://striveschool-api.herokuapp.com/api/comments/' + indice,
         {
           method: 'PUT',
           body: JSON.stringify({
-            ...inputComment,
+            ...ModInputComment,
             rate: 5,
             elementId: post._id,
           }),
@@ -105,8 +108,8 @@ const PostHome = ({ post }) => {
       if (response.ok) {
         console.log('Comment updated successfully')
         doFetch()
-        setInputComment({
-          ...inputComment,
+        setModInputComment({
+          ...ModInputComment,
           comment: '',
         })
       } else {
@@ -115,6 +118,7 @@ const PostHome = ({ post }) => {
     } catch (error) {
       console.error('Error updating comment:', error)
     }
+    handleClose()
   }
 
   const deleteComment = async (indice) => {
@@ -406,13 +410,62 @@ const PostHome = ({ post }) => {
             {allComments.length > 0 &&
               allComments.slice(0, 10).map((commento) => (
                 <ListGroup.Item className="p-3" key={commento._id}>
-                  <p className="fs-5 text-primary fw-medium">
-                    {commento.author}
-                  </p>
-                  {commento.comment}
-                  <button onClick={() => deleteComment(commento._id)}>
-                    cancella
-                  </button>
+                  <div className="d-flex justify-content-between">
+                    <div>
+                      <p className="fs-5 text-primary fw-medium">
+                        {commento.author}
+                      </p>
+                      {commento.comment}
+                    </div>
+                    <div>
+                      <Button
+                        variant="danger"
+                        className="mx-2 "
+                        onClick={() => deleteComment(commento._id)}
+                      >
+                        <i className="bi bi-trash"></i>
+                      </Button>
+                      <Button onClick={handleShow}>
+                        <i className="bi bi-pencil"></i>
+                      </Button>{' '}
+                    </div>
+                  </div>
+                  <div
+                    className="modal show"
+                    style={{ display: 'block', position: 'initial' }}
+                  >
+                    <Modal show={show} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Modifica il commento</Modal.Title>
+                      </Modal.Header>
+
+                      <Modal.Body>
+                        <InputGroup className="my-3">
+                          <Form.Control
+                            placeholder="modify a comment"
+                            aria-label="Recipient's username"
+                            aria-describedby="basic-addon2"
+                            type="text"
+                            value={ModInputComment.comment}
+                            name="commento"
+                            id=""
+                            onChange={handleChangeComment}
+                          />
+                          <Button
+                            type="submit"
+                            onClick={() => handleModComment(commento._id)}
+                            variant="outline-secondary"
+                            id="button-addon2"
+                          >
+                            <i
+                              className="bi bi-send-fill me-1"
+                              style={{ fontSize: '1.5em' }}
+                            ></i>
+                          </Button>
+                        </InputGroup>
+                      </Modal.Body>
+                    </Modal>
+                  </div>
                 </ListGroup.Item>
               ))}
 
