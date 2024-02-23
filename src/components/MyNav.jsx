@@ -27,7 +27,7 @@ const MyNav = ({ setTokenKey, placeholder }) => {
   const username = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -50,7 +50,7 @@ const MyNav = ({ setTokenKey, placeholder }) => {
     const token = tokens[tokenKey];
     dispatch(fetchGeneric(token));
     setShowDropdown(value.trim().length > 0);
-    dispatch(fetchSearchAllJobs(inputSearch))
+    dispatch(fetchSearchAllJobs(inputSearch));
     console.log(token);
   };
 
@@ -69,13 +69,11 @@ const MyNav = ({ setTokenKey, placeholder }) => {
     // da eseguire al momento del logout, come reindirizzamento, ecc.
   };
 
-
-
   useEffect(() => {
     // Nascondi il menu a tendina se entrambi l'input di ricerca e l'array dei risultati di ricerca sono vuoti
     if (inputSearch.trim().length === 0) {
       setShowDropdown(false);
-      setInputSearch("")
+      setInputSearch("");
     }
   }, [inputSearch, search, inputValue]);
 
@@ -90,12 +88,8 @@ const MyNav = ({ setTokenKey, placeholder }) => {
           <Link to="/" className="me-2 nav-link" href="#home">
             <img src="./logo.svg" alt="logo" style={{ height: "2em" }} />
           </Link>
-          <Nav.Link className="d-flex d-lg-none flex-column align-items-center me-0 me-lg-4">
-            <div>
-              <i className="bi bi-search" style={{ fontSize: "1.3em" }}></i>
-            </div>
-          </Nav.Link>
-          <InputGroup className="d-none d-lg-flex ">
+
+          <InputGroup className="d-flex ">
             <InputGroup.Text
               id="basic-addon1"
               className="m-0 border-0 rounded-start"
@@ -115,7 +109,8 @@ const MyNav = ({ setTokenKey, placeholder }) => {
           </InputGroup>
           <ListGroup className="position-absolute top-100 ms-5 z-3 w-25 ">
             {/* Mostra il menu a tendina solo se ci sono risultati di ricerca */}
-            {showDropdown && location.pathname !== "/jobs" &&
+            {showDropdown &&
+              location.pathname !== "/jobs" &&
               search
                 .filter(
                   (result) =>
