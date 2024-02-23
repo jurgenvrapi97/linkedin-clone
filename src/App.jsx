@@ -87,19 +87,17 @@ function App() {
                 </>
               }
             />
+            <Route
+              path="/*"
+              element={
+                <>
+                  <NotFoundPage />
+                </>
+              }
+            />
           </Routes>
           <MSGbar />
         </Container>
-        <Routes>
-          <Route
-            path="/*"
-            element={
-              <>
-                <NotFoundPage />
-              </>
-            }
-          />
-        </Routes>
       </div>
     </BrowserRouter>
   );
