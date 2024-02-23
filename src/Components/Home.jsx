@@ -348,7 +348,7 @@ const Home = ({ selector, tokenKey }) => {
             <Col className="d-flex flex-column-reverse " md={12} lg={12}>
               {allPosts.length > 0 ? (
                 allPosts
-                  .slice(allPosts.length - 50, allPosts.lenght)
+                  .slice(allPosts.length - 5, allPosts.lenght)
                   .map((post) => {
                     return (
                       <div key={post._id}>

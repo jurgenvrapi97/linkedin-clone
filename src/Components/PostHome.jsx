@@ -1,9 +1,10 @@
 // import { ListGroup } from "react-bootstrap";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Button, Col, Form, ListGroup, Modal, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllComments } from "../redux/action";
+import { useEffect, useState } from "react";
 
 const PostHome = ({ post }) => {
   const [showCommentArea, setShowCommentArea] = useState(false);
@@ -113,13 +114,25 @@ const PostHome = ({ post }) => {
       console.error("Error deleting post:", error);
     }
   };
-
   const dispatch = useDispatch();
+  // const goComment = () => {
+  //   dispatch(fetchAllComments());
+  // };
+
+  // useEffect(() => {
+  //   dispatch(fetchAllComments());
+  // }, [dispatch]);
+
   useEffect(() => {
-    dispatch(fetchAllComments());
-  }, [dispatch]);
+    if (username._id) {
+      dispatch(fetchAllComments());
+      console.log("partita");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username._id]);
 
   const allComments = useSelector((state) => state.allComments.allComments);
+  console.log("tutti i commenti ", allComments);
 
   return (
     <>
@@ -139,7 +152,11 @@ const PostHome = ({ post }) => {
                 <Modal.Header closeButton>
                   <Modal.Title>
                     <div>
-                      <img src={username.image} alt="logo" />
+                      <img
+                        src={username.image}
+                        alt="logo"
+                        className="img-post"
+                      />
                     </div>
                     {username.name}
                   </Modal.Title>
@@ -263,7 +280,7 @@ const PostHome = ({ post }) => {
           <ListGroup>
             {allComments.length > 0 &&
               allComments
-                .slice(0, 10)
+                .filter((commento) => post.user._id === commento._id)
                 .map((commento) => (
                   <ListGroup.Item key={commento._id}>
                     {commento.comment}

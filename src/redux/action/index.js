@@ -312,7 +312,8 @@ export const fetchAllComments = () => {
       throw new Error("Network response was not ok");
     }
 
-    const data = await response.json();
+    const firstData = await response.json();
+    const data = firstData.slice(0, 50);
     dispatch({ type: FETCH_ALL_COMMENTS, payload: data });
   };
 };
