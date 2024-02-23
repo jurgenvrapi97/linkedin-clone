@@ -1,125 +1,125 @@
 // import { ListGroup } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import { Button, Col, Form, ListGroup, Modal, Row } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAllComments } from "../redux/action";
+import { useState } from 'react'
+import { Button, Col, Form, ListGroup, Modal, Row } from 'react-bootstrap'
+import Card from 'react-bootstrap/Card'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAllComments } from '../redux/action'
 
 const PostHome = ({ post }) => {
-  const [showCommentArea, setShowCommentArea] = useState(false);
+  const dispatch = useDispatch()
+  const doFetch = () => {
+    dispatch(fetchAllComments(post._id))
+  }
+  const [showCommentArea, setShowCommentArea] = useState(false)
   const toggleCommentArea = () => {
-    setShowCommentArea((prevState) => !prevState);
-  };
-  const handleCloseModale = () => setShowModale(false);
-  const handleShowModale = () => setShowModale(true);
-  const [showModale, setShowModale] = useState(false);
+    setShowCommentArea((prevState) => !prevState)
+    doFetch()
+  }
+  const handleCloseModale = () => setShowModale(false)
+  const handleShowModale = () => setShowModale(true)
+  const [showModale, setShowModale] = useState(false)
 
   const [inputPost, setInputPost] = useState({
-    text: "",
-  });
+    text: '',
+  })
 
   const fetchModificaPost = async () => {
     try {
       let response = await fetch(
         `https://striveschool-api.herokuapp.com/api/posts/${post._id}`,
         {
-          method: "PUT",
+          method: 'PUT',
           body: JSON.stringify({ text: inputPost.text }),
           headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + tokens[username.name.toLowerCase()],
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + tokens[username.name.toLowerCase()],
           },
         }
-      );
+      )
       if (response.ok) {
         setInputPost((prevInputPost) => ({
           ...prevInputPost,
           text: inputPost.text,
-        }));
-        console.log("Post updated successfully");
+        }))
+        console.log('Post updated successfully')
       } else {
-        console.error("Failed to update post");
+        console.error('Failed to update post')
       }
     } catch (error) {
-      console.error("Error updating post:", error);
+      console.error('Error updating post:', error)
     }
-  };
+  }
   const handleChange = (event) => {
-    const value = event.target.value;
+    const value = event.target.value
     setInputPost({
       ...inputPost,
       text: value,
-    });
-  };
-  const [file, setFile] = useState();
+    })
+  }
+  const [file, setFile] = useState()
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
+    setFile(event.target.files[0])
+  }
 
-  const tokens = useSelector((state) => state.user.tokens);
-  const username = useSelector((state) => state.user.user);
+  const tokens = useSelector((state) => state.user.tokens)
+  const username = useSelector((state) => state.user.user)
 
   const handlePutPost = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    fetchModificaPost();
-  };
+    fetchModificaPost()
+  }
 
   const handleUpload = async () => {
-    setShowModale(false);
-    let formData = new FormData();
+    setShowModale(false)
+    let formData = new FormData()
 
-    formData.append("post", file);
+    formData.append('post', file)
 
     try {
       let response = await fetch(
         ` https://striveschool-api.herokuapp.com/api/posts/${post._id} `,
         {
-          method: "POST",
+          method: 'POST',
           body: formData,
           headers: {
-            Authorization: "Bearer " + tokens[username.name.toLowerCase()],
+            Authorization: 'Bearer ' + tokens[username.name.toLowerCase()],
           },
         }
-      );
-      let data = await response.json();
-      console.log(data);
+      )
+      let data = await response.json()
+      console.log(data)
       // dispatch(
       //   fetchAllPosts(tokens[username.name.toLowerCase()], username._id)
       // );
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   const handleDelete = async () => {
     try {
       let response = await fetch(
         `https://striveschool-api.herokuapp.com/api/posts/${post._id}`,
         {
-          method: "DELETE",
+          method: 'DELETE',
           headers: {
-            Authorization: "Bearer " + tokens[username.name.toLowerCase()],
+            Authorization: 'Bearer ' + tokens[username.name.toLowerCase()],
           },
         }
-      );
+      )
       if (response.ok) {
-        console.log("Post deleted successfully");
+        console.log('Post deleted successfully')
       } else {
-        console.error("Failed to delete post");
+        console.error('Failed to delete post')
       }
     } catch (error) {
-      console.error("Error deleting post:", error);
+      console.error('Error deleting post:', error)
     }
-  };
+  }
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchAllComments());
-  }, [dispatch]);
-
-  const allComments = useSelector((state) => state.allComments.allComments);
+  const allComments = useSelector((state) => state.allComments.allComments)
 
   return (
     <>
@@ -128,19 +128,26 @@ const PostHome = ({ post }) => {
           <div className="d-flex justify-content-between">
             <Card.Title>{post.username}</Card.Title>
             <div>
-              {username._id === post.user._id && <Button
-                className="h rounded-5 p-2 bg-transparent border-0"
-                onClick={handleShowModale}
-                variant="black"
-              >
-                <i className="bi bi-pencil"></i>
-              </Button>}
+              {username._id === post.user._id && (
+                <Button
+                  className="h rounded-5 p-2 bg-transparent border-0"
+                  onClick={handleShowModale}
+                  variant="black"
+                >
+                  <i className="bi bi-pencil"></i>
+                </Button>
+              )}
 
               <Modal show={showModale} onHide={handleCloseModale}>
                 <Modal.Header closeButton>
                   <Modal.Title>
                     <div className="d-inline me-2">
-                      <img src={username.image} alt="logo" style={{height: '2em'}} className="rounded-circle"/>
+                      <img
+                        src={username.image}
+                        alt="logo"
+                        style={{ height: '2em' }}
+                        className="rounded-circle"
+                      />
                     </div>
                     {username.name}
                   </Modal.Title>
@@ -185,13 +192,14 @@ const PostHome = ({ post }) => {
                   </div>
                 </Modal.Body>
               </Modal>
-              {username._id === post.user._id && <Button
-                className="bg-transparent border-0"
-                onClick={() => handleDelete(post._id)}
-              >
-                <i className="bi bi-trash text-danger "></i>
-              </Button>}
-
+              {username._id === post.user._id && (
+                <Button
+                  className="bg-transparent border-0"
+                  onClick={() => handleDelete(post._id)}
+                >
+                  <i className="bi bi-trash text-danger "></i>
+                </Button>
+              )}
             </div>
           </div>
           <Card.Subtitle className="mb-2 text-muted">
@@ -199,8 +207,9 @@ const PostHome = ({ post }) => {
           </Card.Subtitle>
           <Card.Text>{post.text}</Card.Text>
           <div className="text-center">
-            {post.image &&  <img src={post.image} alt="image" className="img-post" />}
-           
+            {post.image && (
+              <img src={post.image} alt="image" className="img-post" />
+            )}
           </div>
           <hr />
           <Row className="d-flex justify-content-around ">
@@ -208,11 +217,11 @@ const PostHome = ({ post }) => {
               <Button
                 variant="outline-secondary"
                 className="border border-0 fw-medium rounded-2 d-flex align-items-center"
-                style={{ fontSize: "0.9em" }}
+                style={{ fontSize: '0.9em' }}
               >
                 <i
                   className="bi bi-hand-thumbs-up me-1"
-                  style={{ fontSize: "1.5em" }}
+                  style={{ fontSize: '1.5em' }}
                 ></i>
                 Consiglia
               </Button>
@@ -221,12 +230,12 @@ const PostHome = ({ post }) => {
               <Button
                 variant="outline-secondary"
                 className="border border-0 fw-medium rounded-2 d-flex align-items-center"
-                style={{ fontSize: "0.9em" }}
+                style={{ fontSize: '0.9em' }}
                 onClick={toggleCommentArea}
               >
                 <i
                   className="bi bi-chat-left-dots me-1"
-                  style={{ fontSize: "1.5em" }}
+                  style={{ fontSize: '1.5em' }}
                 ></i>
                 Commenta
               </Button>
@@ -235,11 +244,11 @@ const PostHome = ({ post }) => {
               <Button
                 variant="outline-secondary"
                 className="border border-0 fw-medium rounded-2 d-flex align-items-center"
-                style={{ fontSize: "0.9em" }}
+                style={{ fontSize: '0.9em' }}
               >
                 <i
                   className="bi bi-arrow-repeat me-1"
-                  style={{ fontSize: "1.5em" }}
+                  style={{ fontSize: '1.5em' }}
                 ></i>
                 Diffondi il post
               </Button>
@@ -248,11 +257,11 @@ const PostHome = ({ post }) => {
               <Button
                 variant="outline-secondary"
                 className="border border-0 fw-medium rounded-2 d-flex align-items-center"
-                style={{ fontSize: "0.9em" }}
+                style={{ fontSize: '0.9em' }}
               >
                 <i
                   className="bi bi-send-fill me-1"
-                  style={{ fontSize: "1.5em" }}
+                  style={{ fontSize: '1.5em' }}
                 ></i>
                 Invia
               </Button>
@@ -275,9 +284,9 @@ const PostHome = ({ post }) => {
           </ListGroup>
         </div>
       ) : (
-        ""
+        ''
       )}
     </>
-  );
-};
-export default PostHome;
+  )
+}
+export default PostHome
