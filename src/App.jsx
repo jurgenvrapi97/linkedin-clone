@@ -20,7 +20,6 @@ function App() {
   const userSelector = (state) => state.user.user;
   const idSelector = (state) => state.idUser.user;
   const [tokenKey, setTokenKey] = useState("");
-  console.log("il token è:", tokenKey);
 
   return (
     <BrowserRouter>
@@ -31,7 +30,7 @@ function App() {
               path="/profile"
               element={
                 <>
-                <MyNav setTokenKey={setTokenKey} placeholder="Cerca"/>
+                  <MyNav setTokenKey={setTokenKey} placeholder="Cerca" />
                   <Row className="mt-5">
                     <Col md={8} lg={8} className="mt-5">
                       <Mainprofile selector={userSelector} />
@@ -52,7 +51,7 @@ function App() {
               path="/profile/:userId"
               element={
                 <>
-                  <MyNav setTokenKey={setTokenKey} placeholder="Cerca"/>
+                  <MyNav setTokenKey={setTokenKey} placeholder="Cerca" />
                   <Row>
                     <Col md={8} lg={8} style={{ marginTop: "6em" }}>
                       <Mainprofile selector={idSelector} />
@@ -69,15 +68,24 @@ function App() {
             <Route
               path="/"
               element={
-              <>
-              <MyNav setTokenKey={setTokenKey} placeholder="Cerca"/>
-              <Home selector={userSelector} tokenKey={tokenKey} />
-              </>}
+                <>
+                  <MyNav setTokenKey={setTokenKey} placeholder="Cerca" />
+                  <Home selector={userSelector} tokenKey={tokenKey} />
+                </>
+              }
             />
-            <Route path="/jobs" element={<>
-            <MyNav setTokenKey={setTokenKey} placeholder="Cerca un lavoro, azienda, ..."/> 
-            <Jobs />
-            </>} />
+            <Route
+              path="/jobs"
+              element={
+                <>
+                  <MyNav
+                    setTokenKey={setTokenKey}
+                    placeholder="Cerca un lavoro, azienda, ..."
+                  />
+                  <Jobs />
+                </>
+              }
+            />
           </Routes>
           <MSGbar />
         </Container>
