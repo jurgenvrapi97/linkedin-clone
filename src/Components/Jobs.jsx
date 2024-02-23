@@ -42,7 +42,7 @@ const Jobs = () => {
           <h1 className="text-center mt-2">Risultati di ricerca</h1>
           {queryJobs.slice(0, 30).map((job)=> {
           return (
-            <Col className="bg-white p-0 border border-1 rounded-2 " xs={6} key={job._id}>
+            <Col className="bg-white p-0 border border-1 rounded-2 " lg={6} key={job._id}>
               <Card className="px-4" >
                 <Card.Body >
                   <Card.Title className="mb-3">
@@ -163,7 +163,7 @@ const Jobs = () => {
           )
         })}</>) : ('')}
         
-        <Col className="bg-white p-0 border border-1 rounded-2 " xs={6}>
+        <Col className="bg-white p-0 border border-1 rounded-2 " lg={6}>
         <h1 className="text-center mt-2">Tutte le offerte di lavoro</h1>
           {allJobs.length > 0 ? (
             allJobs.slice(0, 50).map((jobs) => {
@@ -173,7 +173,7 @@ const Jobs = () => {
                   key={jobs._id}
                   className="px-3 pt-3 bg-white rounded-2"
                 >
-                  <Card className="px-4">
+                  <Card className="px-4" style={{maxHeight: '500px', overflow: 'auto'}}>
                     <Card.Body >
                       <Card.Title>
                         <Link
